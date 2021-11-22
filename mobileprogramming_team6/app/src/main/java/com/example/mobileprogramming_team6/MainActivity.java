@@ -6,9 +6,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     //프래그먼트 선언//
@@ -28,9 +35,13 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frameLayout, fragmentNews).commitAllowingStateLoss();
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
+
+
+
+
     }
 
-    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
+    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{ //프래그먼트 변환 코드
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();

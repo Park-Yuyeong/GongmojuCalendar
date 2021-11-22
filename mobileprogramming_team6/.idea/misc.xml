@@ -7,9 +7,10 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265625" />
         <entry key="app/src/main/res/layout/activity_calender.xml" value="0.1322463768115942" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1322463768115942" />
-        <entry key="app/src/main/res/layout/fragment_calender.xml" value="0.10104166666666667" />
+        <entry key="app/src/main/res/layout/fragment_calender.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.10104166666666667" />
         <entry key="app/src/main/res/layout/fragment_news.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/hello.xml" value="0.21041666666666667" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.1" />
       </map>
     </option>
