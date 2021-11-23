@@ -44,6 +44,7 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:id="@+id/btn_to_lastday"
                 android:text="전"
                 android:layout_weight="1"></Button>
             <TextView
@@ -57,6 +58,7 @@
             <Button
                 android:layout_width="0dp"
                 android:text="다음"
+                android:id="@+id/btn_to_nextday"
                 android:layout_height="match_parent"
                 android:layout_weight="1"></Button>
 
@@ -136,38 +138,61 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:orientation="horizontal"
+
                         android:layout_weight="1">
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:id="@+id/tv_1"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:id="@+id/tv_2"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:id="@+id/tv_3"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:id="@+id/tv_4"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:id="@+id/tv_5"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:id="@+id/tv_6"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:id="@+id/tv_7"
+                            />
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -186,31 +211,52 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_8"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_9"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_10"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_11"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_12"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_13"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_14"
+                            android:gravity="center"
+                            />
 
 
                     </LinearLayout>
@@ -236,31 +282,52 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_15"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_16"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_17"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_18"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_19"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_20"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_21"
+                            android:gravity="center"
+                            />
 
 
                     </LinearLayout>
@@ -284,31 +351,52 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_22"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_23"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_24"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_25"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_26"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_27"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_28"
+                            android:gravity="center"
+                            />
 
 
                     </LinearLayout>
@@ -332,31 +420,52 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_29"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_30"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_31"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_32"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_33"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_34"
+                            android:gravity="center"
+                            />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:id="@+id/tv_35"
+                            android:gravity="center"
+                            />
 
 
                     </LinearLayout>
