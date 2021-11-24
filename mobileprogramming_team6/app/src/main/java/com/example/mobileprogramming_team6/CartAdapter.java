@@ -1,12 +1,16 @@
 package com.example.mobileprogramming_team6;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.shapes.Shape;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -35,6 +39,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.tvName.setText(arrayList.get(position).getName());
         holder.tvListingDate.setText(arrayList.get(position).getListingDate());
         holder.tvSubscriptDate.setText(arrayList.get(position).getSubscriptDate());
+        int randomNum = (int)(Math.random() * 10);
+        if(randomNum < 5){
+            holder.linearlayout.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.shape_yellow));
+
+        }
+        if(randomNum  >= 5){
+            holder.linearlayout.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.shape_pink));
+        }
+
+
     }
 
     @Override
@@ -47,6 +61,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         TextView tvName; // 기업명
         TextView tvSubscriptDate; // 상장일
         TextView tvListingDate; // 청약일
+        LinearLayout linearlayout;
 
 
         public CartViewHolder(@NonNull View itemView) {
@@ -54,6 +69,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             this.tvName = itemView.findViewById(R.id.tvName);
             this.tvSubscriptDate = itemView.findViewById(R.id.tvSubscriptDate);
             this.tvListingDate = itemView.findViewById(R.id.tvListingDate);
+            this.linearlayout = itemView.findViewById(R.id.linearlayout);
+
         }
     }
 }
