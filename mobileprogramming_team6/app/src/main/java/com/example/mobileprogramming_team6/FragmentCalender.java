@@ -16,21 +16,34 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class FragmentCalender extends Fragment {
-    Calendar cal = Calendar.getInstance();
-    String weekDay;
+
     Integer year;
     Integer month;
     Integer day;
-    Integer first;
-    Integer first_weekday;
-    Integer max_day;
-    Integer last_max_day;
+
     int[] calenderday = new int[35];
+
+
+
+    private ArrayList<Stock> arrayList1 = new ArrayList<>();
+    private ArrayList<Stock> arrayList2 = new ArrayList<>();
+    private ArrayList<Stock> arrayList3 = new ArrayList<>();
+    private ArrayList<Stock> arrayList4 = new ArrayList<>();
+    private ArrayList<Stock> arrayList5 = new ArrayList<>();
+    private ArrayList<Stock> arrayList6 = new ArrayList<>();
+    private ArrayList<Stock> arrayList7 = new ArrayList<>();
+    private ArrayList<Stock> arrayList8 = new ArrayList<>();
+    private ArrayList<Stock> arrayList9 = new ArrayList<>();
+    private ArrayList<Stock> arrayList10 = new ArrayList<>();
+    private ArrayList<Stock> arrayList11 = new ArrayList<>();
+    private ArrayList<Stock> arrayList12 = new ArrayList<>();
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -207,6 +220,7 @@ public class FragmentCalender extends Fragment {
             tv_30.setTextColor(Color.parseColor("#33000000"));
         if(calenderday[28] < 10)
             tv_29.setTextColor(Color.parseColor("#33000000"));
+
 
 
 
@@ -429,6 +443,7 @@ public class FragmentCalender extends Fragment {
                 tv_34.setText(String.valueOf(calenderday[33]));
                 tv_35.setText(String.valueOf(calenderday[34]));
 
+
                 if(calenderday[0] > 10)
                     tv_1.setTextColor(Color.parseColor("#33000000"));
                 if(calenderday[1] > 10)
@@ -461,9 +476,16 @@ public class FragmentCalender extends Fragment {
             }
         });
 
+        ((MainActivity)getActivity()).dbRef(arrayList1, "1월");
+        ((MainActivity)getActivity()).dbRef(arrayList2, "2월");
+        ((MainActivity)getActivity()).dbRef(arrayList3, "3월");
+        ((MainActivity)getActivity()).dbRef(arrayList4, "4월");
+        ((MainActivity)getActivity()).dbRef(arrayList5, "5월");
+        ((MainActivity)getActivity()).dbRef(arrayList6, "6월");
+        ((MainActivity)getActivity()).dbRef(arrayList7, "7월");
+        ((MainActivity)getActivity()).dbRef(arrayList8, "8월");
 
-
-
+        Log.d("hello", arrayList1.toString());
 
 
 
@@ -526,11 +548,11 @@ public class FragmentCalender extends Fragment {
                 last_max_day += 1;
 
             }
-            if(i > max_day){
+            if(i >= max_day + first_weekday){
                 calenderday[i] = a;
                 a+= 1;
             }
-            if( (first_weekday<= i) & (i <= max_day)){
+            if( (first_weekday<= i) & (i < max_day + first_weekday)){
                 calenderday[i] = b;
                 b+=1;
             }
