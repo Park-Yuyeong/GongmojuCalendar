@@ -18,14 +18,26 @@
             android:layout_weight="2"
             android:layout_height="match_parent"/>
         <TextView
+<<<<<<< HEAD
+            android:id="@+id/tvName"
+=======
+>>>>>>> 7f7123161dac850967e58b814ecc573011d69e4a
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"/>
         <TextView
+<<<<<<< HEAD
+            android:id="@+id/tvSubscriptDate"
+=======
+>>>>>>> 7f7123161dac850967e58b814ecc573011d69e4a
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"/>
         <TextView
+<<<<<<< HEAD
+            android:id="@+id/tvListingDate"
+=======
+>>>>>>> 7f7123161dac850967e58b814ecc573011d69e4a
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"/>
