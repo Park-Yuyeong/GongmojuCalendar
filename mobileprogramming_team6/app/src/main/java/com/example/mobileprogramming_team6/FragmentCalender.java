@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -476,16 +478,10 @@ public class FragmentCalender extends Fragment {
             }
         });
 
-        ((MainActivity)getActivity()).dbRef(arrayList1, "1월");
-        ((MainActivity)getActivity()).dbRef(arrayList2, "2월");
-        ((MainActivity)getActivity()).dbRef(arrayList3, "3월");
-        ((MainActivity)getActivity()).dbRef(arrayList4, "4월");
-        ((MainActivity)getActivity()).dbRef(arrayList5, "5월");
-        ((MainActivity)getActivity()).dbRef(arrayList6, "6월");
-        ((MainActivity)getActivity()).dbRef(arrayList7, "7월");
-        ((MainActivity)getActivity()).dbRef(arrayList8, "8월");
 
-        Log.d("hello", arrayList1.toString());
+
+
+
 
 
 
