@@ -48,17 +48,21 @@ public class AlarmActivity extends AppCompatActivity {
         //button.setOnClickListener(new View.OnClickListener(){
             //@Override
             //public void onClick(View v){
+                //Log.d("button", "button click!!");
                 //setAlarm();
             //}
        //});
 
-       setAlarm(); // 왜 안되는가..?
+       //setAlarm(); // 왜 안되는가..?
     }
 
+    // 알림 on
     private void setAlarm(){
         // AlarmReceiver에 값 전달
         Intent receiverIntent = new Intent(AlarmActivity.this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 0, receiverIntent, 0);
+
+        Log.d("setAlarm", "setAlarm() start!!");
 
         String form = date + " 00:19:00"; // test
         // String form = date + " 22:00:00"; // 실제 구현시 알람이 울리는 시각
@@ -75,6 +79,20 @@ public class AlarmActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(datetime);
 
+        Log.d("setAlarm", form + "에 알람 울림!");
+
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
    }
+
+    // 알람 off
+    private void cancelAlarm(){
+        Intent cancelIntent = new Intent(AlarmActivity.this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 0, cancelIntent, 0);
+
+        Log.d("cancelAlarm", "cancelAlarm() start!!");
+
+        Log.d("setAlarm", "알림 해제!!");
+
+        alarmManager.cancel(pendingIntent);
+    }
 }

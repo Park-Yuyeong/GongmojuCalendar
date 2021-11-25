@@ -1,14 +1,19 @@
 package com.example.mobileprogramming_team6;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -17,11 +22,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
     //프래그먼트 선언//
@@ -48,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
+
+    // 알림 코드 구현 시 필요한 변수들
+    private AlarmManager alarmManager;
+    private GregorianCalendar mCalendar;
+
+    private NotificationManager notificationManager;
+    NotificationCompat.Builder builder;
+
+    String date = "2021-11-24"; // 임의의 날짜 설정
 
     //데이터베이스 연동, 연결//
     void dbRef(ArrayList<Stock> arr, String month){
@@ -113,7 +128,22 @@ public class MainActivity extends AppCompatActivity {
         dbRef(arrayList12, "12월");
 
 
+        // notification
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        mCalendar = new GregorianCalendar();
+
+        // 알람 버튼, 임시(프엔 작성 후 맞게 수정)
+        //Button button = (Button) findViewById(R.id.btntest);
+        //button.setOnClickListener(new View.OnClickListener(){
+            //@Override
+            //public void onClick(View v){
+                //Log.d("button", "button click!!");
+                //setAlarm();
+            //}
+        //});
 
 
 
@@ -138,6 +168,35 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
+    }
+
+    // 알림 ON
+    private void setAlarm(){
+        // AlarmReceiver에 값 전달
+        Intent receiverIntent = new Intent(MainActivity.this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, receiverIntent, 0);
+
+        Log.d("setAlarm", "setAlarm() start!!");
+
+        String form = date + " 10:49:30"; // test
+        // String form = date + " 22:00:00"; // 실제 구현시 알람이 울리는 시각
+
+        // 날짜 포맷을 바꿔주는 소스코드
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date datetime = null;
+        try{
+            datetime = dateFormat.parse(form);
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(datetime);
+
+        Log.d("setAlarm", form + "에 알람 울림!");
+
+
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
 }
