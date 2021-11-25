@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentNews fragmentNews = new FragmentNews();
     private FragmentCalender fragmentCalender = new FragmentCalender();
     private FragmentCart fragmentCart = new FragmentCart();
+    private FragmentCalender_new fragmentCalender_new = new FragmentCalender_new();
 
     //객체를 담을 Array배열 선언//
     private ArrayList<Stock> arrayList1;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     String date = "2021-11-24"; // 임의의 날짜 설정
 
     //데이터베이스 연동, 연결//
-    void dbRef(ArrayList<Stock> arr, String month){
+     void dbRef(ArrayList<Stock> arr, String month){
         database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
 
         databaseReference = database.getReference("2021년 청약일정/"+ month); // DB 테이블 연결
@@ -73,10 +74,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                arr.clear(); // 기존 배열리스트 초기화
+                arr.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Log.d("Data", snapshot.toString());
                     Stock stock = snapshot.getValue(Stock.class); // 만들어뒀던 Stock 객체에 데이터를 담는다
+
                     arr.add(stock); // 담은 데이터들을 배열리스트에 넣는다
                 }
                 Log.d("Database", "Value is: " + arr.toString());
@@ -127,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         dbRef(arrayList11, "11월");
         dbRef(arrayList12, "12월");
 
-
+        Log.d("hhhhhhhh", arrayList1.toString());
         // notification
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -159,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                     transaction.replace(R.id.frameLayout, fragmentNews).commitAllowingStateLoss();
                     break;
                 case R.id.calenderItem:
-                    transaction.replace(R.id.frameLayout, fragmentCalender).commitAllowingStateLoss();
+                    transaction.replace(R.id.frameLayout, fragmentCalender_new).commitAllowingStateLoss();
                     break;
                 case R.id.cartItem:
                     transaction.replace(R.id.frameLayout, fragmentCart).commitAllowingStateLoss();
