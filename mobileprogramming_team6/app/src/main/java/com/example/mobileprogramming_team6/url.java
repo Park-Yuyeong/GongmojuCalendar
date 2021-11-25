@@ -10,16 +10,40 @@ public class url {
     // 버튼 클릭시 사이트 이동
 
     // android:onClicked = "onButton2Clicked " ( xml)
-    public void onButton2Clicked(View view){
+    public void onButton2Clicked(View view) {
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("url"));
         // startActivity(intent);
     }
+
+    // textview 클릭시 사이트 이동
+
+    // android:onClicked = " btn" (xml)
+    // android:clickable = "true" (xml)
+    public void btn(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("url"));
+        // startActivity(intent);
+    }
+
 }
+
 // 기업 정보 사이트
 //1월
-//        레인보우로보틱스 http://www.38.co.kr/html/fund/?o=v&no=1615&l=&page=1
+    //레인보우로보틱스 http://www.38.co.kr/html/fund/?o=v&no=1615&l=&page=1
+//    public void 레인보우로보틱스(View view) {
+//
+//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.38.co.kr/html/fund/?o=v&no=1615&l=&page=1"));
+//        // startActivity(intent);
+//    }
+
 //        모비릭스 http://www.38.co.kr/html/fund/?o=v&no=1617&l=&page=1
+//    public void 모비릭스(View view) {
+//
+//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.38.co.kr/html/fund/?o=v&no=1617&l=&page=1"));
+//        // startActivity(intent);
+//    }
+
 //        선진뷰티사이언스 http://www.38.co.kr/html/fund/?o=v&no=1614&l=&page=1
 //        솔루엠 http://www.38.co.kr/html/fund/?o=v&no=1620&l=&page=1
 //        신한스팩7호 http://www.38.co.kr/html/fund/?o=v&no=1623&l=&page=1
