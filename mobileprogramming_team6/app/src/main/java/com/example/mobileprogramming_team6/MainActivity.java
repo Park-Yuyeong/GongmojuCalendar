@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,10 +62,6 @@ public class MainActivity extends AppCompatActivity {
         //transaction.replace(R.id.frameLayout, fragmentNews).commitAllowingStateLoss();
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
-
-        ////////기기 고유번호 가져오기/////////
-        String android_id = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
-        Log.d("고유id", android_id);
 
 
 //
@@ -135,15 +130,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //관심종목의 기업이름 클릭시 사이트로 이동
+    //관심종목의 기업이름 크릭시 사이트로 이동
 
     public void btn(View view){
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.38.co.kr/html/fund/?o=v&no=1720&l=&page=1"));
-        startActivity(intent);
-    }
-
-    public void btn1(View view){
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.38.co.kr/html/fund/?o=v&no=1720&l=&page=1"));
         startActivity(intent);

@@ -68,8 +68,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         holder.tvName.setText(arrayList.get(position).getName());
         holder.tvListingDate.setText(arrayList.get(position).getListingDate());
-
-
+        holder.tvSubscriptDate.setText(arrayList.get(position).getSubscriptDate());
 
         // 알림 상태 저장을 위한 코드
         pref = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
@@ -95,7 +94,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             @Override
             public void onClick(View view) {
                 listDate = makeDateString(2021, 10, Integer.parseInt(holder.tvListingDate.getText().toString()));
-//                subsDate = makeDateString(2021, 11, Integer.parseInt(holder.tvSubscriptDate.getText().toString()));
+                subsDate = makeDateString(2021, 11, Integer.parseInt(holder.tvSubscriptDate.getText().toString()));
 
                 if (holder.btnNoti.isSelected()){
                     if (am_list == null && am_subs == null){
@@ -198,7 +197,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
         TextView tvName; // 기업명
-
+        TextView tvSubscriptDate; // 상장일
         TextView tvListingDate; // 청약일
         LinearLayout linearlayout;
 
@@ -208,7 +207,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
             this.tvName = itemView.findViewById(R.id.tvName);
-
+            this.tvSubscriptDate = itemView.findViewById(R.id.tvSubscriptDate);
             this.tvListingDate = itemView.findViewById(R.id.tvListingDate);
             this.linearlayout = itemView.findViewById(R.id.linearlayout);
 

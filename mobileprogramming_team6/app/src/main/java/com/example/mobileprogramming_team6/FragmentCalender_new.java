@@ -1,8 +1,6 @@
 package com.example.mobileprogramming_team6;
 
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -94,7 +92,6 @@ public class FragmentCalender_new extends Fragment {
                     int dateMonth =  Integer.parseInt(month)-1;
                     int dateListingDay =  Integer.parseInt(stock.getListingDate());
                     int dateSubscriptDay =  Integer.parseInt(stock.getSubscriptDate());
-                    String dateInfor = stock.getInfor();
                     Log.d("month", String.valueOf(dateMonth));
                     Log.d("ListingDay", String.valueOf(dateListingDay));
                     Log.d("SubscriptDay", String.valueOf(dateSubscriptDay));
@@ -210,7 +207,6 @@ public class FragmentCalender_new extends Fragment {
                 c2.setSubscriptDate("2021~~~");
                 c.add(c2);
                 adapter.notifyDataSetChanged();
-
 
 
             }

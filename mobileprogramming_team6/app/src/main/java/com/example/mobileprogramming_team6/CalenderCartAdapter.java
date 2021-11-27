@@ -38,9 +38,8 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
     public void onBindViewHolder(@NonNull CalenderCartViewHolder holder, int position) {
 
         holder.tvName.setText(arrayList.get(position).getName());
-        holder.tvListingDate.setText( arrayList.get(position).getListingDate());
-        holder.tvSubscriptDate.setText( arrayList.get(position).getSubscriptDate());
-
+        holder.tvListingDate.setText(arrayList.get(position).getListingDate());
+        holder.tvSubscriptDate.setText(arrayList.get(position).getSubscriptDate());
 
     }
 
