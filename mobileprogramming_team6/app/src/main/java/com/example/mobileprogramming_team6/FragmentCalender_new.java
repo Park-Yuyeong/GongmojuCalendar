@@ -14,16 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-<<<<<<< HEAD
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-=======
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
->>>>>>> 537614a312ed55c5c2520cadf89a7af52fa0f657
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
@@ -44,13 +36,7 @@ public class FragmentCalender_new extends Fragment {
     private RecyclerView.Adapter adapter;
     MaterialCalendarView materialCalendarView;
     RecyclerView recyclerView;
-<<<<<<< HEAD
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
-//    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-=======
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
->>>>>>> 537614a312ed55c5c2520cadf89a7af52fa0f657
 
 
     public void adddate(int year, int month, int day){ //날짜 리스트 만드는 함수
@@ -81,78 +67,7 @@ public class FragmentCalender_new extends Fragment {
         String c = calendarDay.toString().substring(12, 21);
         return c;
 
-<<<<<<< HEAD
-    }
 
-    //데이터베이스 연동, 연결//
-    void dbRef(String month){
-        database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
-
-        databaseReference = database.getReference("2021년 청약일정/"+ month); // DB 테이블 연결
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Log.d("Data", snapshot.toString());
-                    Stock stock = snapshot.getValue(Stock.class); // 만들어뒀던 Stock 객체에 데이터를 담는다
-
-                    int dateMonth =  Integer.parseInt(month);
-                    int dateListingDay =  Integer.parseInt(stock.getListingDate());
-                    int dateSubscriptDay = Integer.parseInt(stock.getSubscriptDate());
-                    if(dateListingDay != 0){
-                        adddate2(2021, dateMonth, dateListingDay);
-                    }
-                    if(dateSubscriptDay != 0){
-                        adddate(2021,dateMonth,dateSubscriptDay);
-                        adddate(2021,dateMonth,dateSubscriptDay-1);
-                    }
-                }
-                Log.d("adddate", dates.toString());
-                for(int i = 0; i<dates_2.size(); i++){
-                    colors.add(Color.rgb(255+(i*10),204+(i*10),255+(i*10)));
-                }
-//                colors.add(Color.rgb(255,204,255));
-//                colors.add(Color.rgb(255,204,255));
-//                colors.add(Color.rgb(255,255,153));
-//                colors.add(Color.rgb(255,255,153));
-//                colors.add(Color.rgb(204,204,255));
-//                colors.add(Color.RED);
-//                colors.add(Color.YELLOW);
-//                colors.add(Color.YELLOW);
-//                for(int i = 0 ; i < dates.size()-1; i ++){
-//                    if (i%2 == 0 ){
-//                        ArrayList<CalendarDay> dates1 = new ArrayList<>();
-//                        dates1.add(dates.get(i));
-//                        dates1.add(dates.get(i+1));
-//                        Log.d("hello", dates1.toString());
-//                        Log.d("hello", colors.get(i).toString());
-//                        Eventdecorator e1 = new Eventdecorator(colors.get(i), dates1);
-//                        e.add(e1);
-//
-//                        materialCalendarView.addDecorators(e);
-//                        Log.d("hello", e.toString());
-//                    }
-//
-//                }
-                for(int i = 0; i<dates_2.size(); i++){
-                    Eventdecorator e1 = new Eventdecorator(colors.get(i), dates_2);
-                    e.add(e1);
-
-                    materialCalendarView.addDecorators(e);
-                }
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                //디비를 가져오던중 에러 발생 시
-                Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
-            }
-        });
-=======
-
->>>>>>> 537614a312ed55c5c2520cadf89a7af52fa0f657
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -162,45 +77,6 @@ public class FragmentCalender_new extends Fragment {
         materialCalendarView = (MaterialCalendarView)rootView.findViewById(R.id.calender);
         tv_selected_date = (TextView)rootView.findViewById(R.id.tv_selected_date);
 
-<<<<<<< HEAD
-        dbRef("10");
-
-
-//        colors.add(Color.rgb(255,204,255));
-//        colors.add(Color.rgb(255,204,255));
-//        colors.add(Color.rgb(255,255,153));
-//        colors.add(Color.rgb(255,255,153));
-//        colors.add(Color.rgb(204,204,255));
-//        colors.add(Color.RED);
-//        colors.add(Color.YELLOW);
-//        colors.add(Color.YELLOW);
-
-
-//        adddate(2021,10,11);
-//        adddate(2021, 10, 10);
-//        adddate(2021, 11, 10);
-//        adddate(2021, 11, 11);
-//        adddate(2021, 11, 11);
-//        adddate(2021,11,12);
-//
-//
-//        adddate2(2021, 10, 10);
-//        adddate2(2021, 10, 10);
-//        adddate2(2021, 10 , 11);
-//        adddate2(2021, 10 , 11);
-//        adddate2(2021, 10 , 11);
-//        adddate2(2021, 10 , 11);
-//
-//
-//        names.add("NH");
-//        names.add("NH");
-//        names.add("카카오");
-//        names.add("카카오");
-//        names.add("daum");
-//        names.add("daum");
-//
-//        recyclerView = rootView.findViewById(R.id.recyclerView);//activity_main.xml에 구현된 id 연결
-=======
 
         colors.add(Color.rgb(255,204,255));
         colors.add(Color.rgb(255,204,255));
@@ -236,7 +112,6 @@ public class FragmentCalender_new extends Fragment {
         names.add("daum");
 
         recyclerView = rootView.findViewById(R.id.recyclerView);//activity_main.xml에 구현된 id 연결
->>>>>>> 537614a312ed55c5c2520cadf89a7af52fa0f657
 
 //        ArrayList<Cart> c = new ArrayList<>();
 //        Cart c1 = null;
@@ -249,23 +124,6 @@ public class FragmentCalender_new extends Fragment {
 
 
 
-<<<<<<< HEAD
-//        for(int i = 0 ; i < dates.size()-1; i ++){
-//            if (i%2 == 0 ){
-//                ArrayList<CalendarDay> dates1 = new ArrayList<>();
-//                dates1.add(dates.get(i));
-//                dates1.add(dates.get(i+1));
-//                Log.d("hello", dates1.toString());
-//                Log.d("hello", colors.get(i).toString());
-//                Eventdecorator e1 = new Eventdecorator(colors.get(i), dates1);
-//                e.add(e1);
-//
-//                materialCalendarView.addDecorators(e);
-//                Log.d("hello", e.toString());
-//            }
-//
-//        }
-=======
 
 
 
@@ -284,7 +142,6 @@ public class FragmentCalender_new extends Fragment {
             }
 
         }
->>>>>>> 537614a312ed55c5c2520cadf89a7af52fa0f657
 
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
