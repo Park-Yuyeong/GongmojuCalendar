@@ -149,10 +149,10 @@ public class FragmentCalender_new extends Fragment {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 tv_selected_date.setText(materialCalendarView.getSelectedDate().toString());
-                c.clear();
-                String a = materialCalendarView.getSelectedDate().toString();
-                Cart c1 = new Cart("11",a, "2021" );
-                c.add(c1);
+//                c.clear();
+//                String a = materialCalendarView.getSelectedDate().toString();
+//                Cart c1 = new Cart("11",a, "2021" );
+//                c.add(c1);
                 adapter.notifyDataSetChanged();
 
                 for(int i = 1 ; i < dates.size()-1 ; i ++){

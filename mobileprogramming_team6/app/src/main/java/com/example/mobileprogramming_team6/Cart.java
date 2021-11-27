@@ -6,10 +6,8 @@ public class Cart {
     private String listingDate; // 상장일
     private String subscriptDate; // 청약일
 
-    public Cart(String name, String listingDate, String subscriptDate) {
-        this.Name = name;
-        this.listingDate = listingDate;
-        this.subscriptDate = subscriptDate;
+    public Cart() {
+
     }
 
     public String getName() {
