@@ -36,6 +36,7 @@ public class FragmentCalender_new extends Fragment {
     private RecyclerView.Adapter adapter;
     MaterialCalendarView materialCalendarView;
     RecyclerView recyclerView;
+    ArrayList<Cart> c;
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
@@ -111,18 +112,19 @@ public class FragmentCalender_new extends Fragment {
         names.add("daum");
         names.add("daum");
 
-        recyclerView = rootView.findViewById(R.id.recyclerView);//activity_main.xml에 구현된 id 연결
-
-//        ArrayList<Cart> c = new ArrayList<>();
-//        Cart c1 = null;
-//        c1.setListingDate("2021.11.1");
-//        c1.setName("hello");
-//        c1.setSubscriptDate("2021.11.1");
-//        c.add(c1);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(layoutManager);
+        c = new ArrayList<>();
 
 
+        recyclerView = rootView.findViewById(R.id.recyclerView1);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new CalenderCartAdapter(c, getActivity());
+        recyclerView.setAdapter(adapter);
+
+
+        adapter.notifyDataSetChanged();
 
 
 
@@ -147,7 +149,11 @@ public class FragmentCalender_new extends Fragment {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 tv_selected_date.setText(materialCalendarView.getSelectedDate().toString());
-
+                c.clear();
+                String a = materialCalendarView.getSelectedDate().toString();
+                Cart c1 = new Cart("11",a, "2021" );
+                c.add(c1);
+                adapter.notifyDataSetChanged();
 
                 for(int i = 1 ; i < dates.size()-1 ; i ++){
                     if(dates.get(i).toString().equals(materialCalendarView.getSelectedDate())){
@@ -160,6 +166,10 @@ public class FragmentCalender_new extends Fragment {
             }
 
         });
+
+
+
+
 //        adapter.notifyDataSetChanged();
 //        adapter = new CalenderCartAdapter(c, getActivity());
 //        recyclerView.setAdapter(adapter);
