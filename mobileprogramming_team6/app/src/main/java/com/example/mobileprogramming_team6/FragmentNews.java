@@ -34,6 +34,13 @@ public class FragmentNews extends Fragment {
     private DatabaseReference databaseReference;
 
 
+    private ArrayList<Cart> cartArrayList2;
+    private RecyclerView recyclerView2;
+    private RecyclerView.Adapter adapter2;
+    private FirebaseDatabase database2;
+    private DatabaseReference databaseReference2;
+
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,7 +62,10 @@ public class FragmentNews extends Fragment {
                 cartArrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){ // 반복문으로 데이터 List를 추출해냄
                     Cart cart = snapshot.getValue(Cart.class); // 만들어뒀던 Cart 객체에 데이터를 담는다.
-                    cartArrayList.add(cart); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
+
+
+                    ////////////////이곳은 오늘 날짜와 같은 데이터만 뽑아야함/////////////////
+                    cartArrayList.add(cart);
                 }
                 adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
             }
@@ -66,8 +76,48 @@ public class FragmentNews extends Fragment {
                 Log.e("MainActivity",String.valueOf(error.toException())); // 에러문 출력
             }
         });
-        adapter = new CartAdapter(cartArrayList, getActivity());
+        adapter = new NewsCartAdapter(cartArrayList, getActivity());
         recyclerView.setAdapter(adapter);
+
+
+
+
+
+
+
+        recyclerView2 = rootView.findViewById(R.id.recyclerView_other);
+        recyclerView2.setHasFixedSize(true); //리사이클뷰 기존성능 강화
+        RecyclerView.LayoutManager layoutManager2= new LinearLayoutManager(getActivity());
+        recyclerView2.setLayoutManager(layoutManager2);
+        cartArrayList2 = new ArrayList<>(); // Cart 객체를 담을 어레이 리스트(어뎁터 쪽으로_)
+
+        database2 = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
+        databaseReference2 = database.getReference("2021년 청약일정"); //DB 테이블 연결
+        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                cartArrayList2.clear(); // 기존 배열리스트가 존재하지않게 초기화
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){ // 반복문으로 데이터 List를 추출해냄
+                    Cart cart = snapshot.getValue(Cart.class); // 만들어뒀던 Cart 객체에 데이터를 담는다.
+
+                    ////////////////이곳은 오늘 날짜와 같은 데이터만 뽑아야함/////////////////
+                    cartArrayList2.add(cart);
+                }
+                adapter2.notifyDataSetChanged(); // 리스트 저장 및 새로고침
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("MainActivity",String.valueOf(error.toException())); // 에러문 출력
+            }
+        });
+        adapter2 = new NewsCartAdapter(cartArrayList2, getActivity());
+        recyclerView2.setAdapter(adapter2);
+
+
+
 
         return rootView;
     }

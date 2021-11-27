@@ -82,14 +82,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             holder.btnNoti.setSelected(false);
         }
 
-        int randomNum = (int)(Math.random() * 10);
-        if(randomNum < 5){
-            holder.linearlayout.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.shape_yellow));
 
-        }
-        if(randomNum  >= 5){
-            holder.linearlayout.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.shape_pink));
-        }
+
+        holder.linearlayout.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.shape_yellow));
+
+
+
 
         // 알림 버튼 on&off
         holder.btnNoti.setOnClickListener(new View.OnClickListener() {

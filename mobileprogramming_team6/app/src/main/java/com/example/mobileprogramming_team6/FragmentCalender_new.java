@@ -146,7 +146,7 @@ public class FragmentCalender_new extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_calender_new, container, false) ;
         materialCalendarView = (MaterialCalendarView)rootView.findViewById(R.id.calender);
-        tv_selected_date = (TextView)rootView.findViewById(R.id.tv_selected_date);
+
 
 
         names.add("NH");
@@ -185,29 +185,23 @@ public class FragmentCalender_new extends Fragment {
 
         adapter.notifyDataSetChanged();
 
-        adapter = new CalenderCartAdapter(c, getActivity());
-        recyclerView.setAdapter(adapter);
 
-
-        adapter.notifyDataSetChanged();
 
 
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                tv_selected_date.setText(materialCalendarView.getSelectedDate().toString());
-//                c.clear();
-//                String a = materialCalendarView.getSelectedDate().toString();
-//                Cart c1 = new Cart("11",a, "2021" );
-//                c.add(c1);
+
+                c.clear();
+                String a = materialCalendarView.getSelectedDate().toString();
+                Cart c1 = new Cart();
+                c1.setListingDate(a);
+                c1.setName("회사명");
+                c1.setSubscriptDate("2021 ~~~");
+                c.add(c1);
                 adapter.notifyDataSetChanged();
 
-                for(int i = 1 ; i < dates.size()-1 ; i ++){
-                    if(dates.get(i).toString().equals(materialCalendarView.getSelectedDate())){
 
-
-                    }
-                }
 
 
             }
