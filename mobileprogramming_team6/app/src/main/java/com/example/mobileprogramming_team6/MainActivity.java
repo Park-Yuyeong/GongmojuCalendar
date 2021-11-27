@@ -135,9 +135,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //관심종목의 기업이름 크릭시 사이트로 이동
+    //관심종목의 기업이름 클릭시 사이트로 이동
 
     public void btn(View view){
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.38.co.kr/html/fund/?o=v&no=1720&l=&page=1"));
+        startActivity(intent);
+    }
+
+    public void btn1(View view){
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.38.co.kr/html/fund/?o=v&no=1720&l=&page=1"));
         startActivity(intent);
