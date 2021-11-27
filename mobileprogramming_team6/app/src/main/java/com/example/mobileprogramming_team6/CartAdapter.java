@@ -21,6 +21,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -93,8 +95,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.btnNoti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listDate = makeDateString(2021, 10, Integer.parseInt(holder.tvListingDate.getText().toString()));
-                subsDate = makeDateString(2021, 11, Integer.parseInt(holder.tvSubscriptDate.getText().toString()));
+                listDate = holder.tvListingDate.getText().toString();
+                subsDate = holder.tvSubscriptDate.getText().toString();
+                //listDate = makeDateString(2021, 10, Integer.parseInt(holder.tvListingDate.getText().toString()));
+                //subsDate = makeDateString(2021, 11, Integer.parseInt(holder.tvSubscriptDate.getText().toString()));
 
                 if (holder.btnNoti.isSelected()){
                     if (am_list == null && am_subs == null){
@@ -182,6 +186,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 if (am_subs != null && holder.btnNoti.isSelected()){
                     cancelAlarm_subs();
                 }
+
+                FirebaseDatabase.getInstance().getReference("Users/user1").child(holder.tvName.getText().toString()).removeValue();
+
                 arrayList.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
                 notifyItemRangeChanged(holder.getAdapterPosition(), arrayList.size());
