@@ -201,7 +201,12 @@ public class FragmentCalender_new extends Fragment {
                 c.add(c1);
                 adapter.notifyDataSetChanged();
 
-
+                Cart c2 = new Cart();
+                c2.setListingDate(a);
+                c2.setName("ㅁㅁㅁ");
+                c2.setSubscriptDate("2021~~~");
+                c.add(c2);
+                adapter.notifyDataSetChanged();
 
 
             }

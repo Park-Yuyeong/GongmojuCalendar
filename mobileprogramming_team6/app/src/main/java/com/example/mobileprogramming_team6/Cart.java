@@ -3,11 +3,19 @@ package com.example.mobileprogramming_team6;
 // Cart 페이지에 넣어줄 객체 생성
 public class Cart {
     private String Name; // 기업명
+    private String Month; // 월
     private String listingDate; // 상장일
     private String subscriptDate; // 청약일
 
     public Cart() {
 
+    }
+    public String getMonth() {
+        return Month;
+    }
+
+    public void setMonth(String month) {
+        Month = month;
     }
 
     public String getName() {

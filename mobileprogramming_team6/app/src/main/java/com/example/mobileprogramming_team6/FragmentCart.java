@@ -45,7 +45,7 @@ public class FragmentCart extends Fragment {
         cartArrayList = new ArrayList<>(); // Cart 객체를 담을 어레이 리스트(어뎁터 쪽으로_
 
         database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
-        databaseReference = database.getReference("Users"); //DB 테이블 연결
+        databaseReference = database.getReference("Users/user1"); //DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -54,6 +54,7 @@ public class FragmentCart extends Fragment {
                 cartArrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){ // 반복문으로 데이터 List를 추출해냄
                     Cart cart = snapshot.getValue(Cart.class); // 만들어뒀던 Cart 객체에 데이터를 담는다.
+                    cart.setName(snapshot.getKey());
                     cartArrayList.add(cart); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
 
                 }
