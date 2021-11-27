@@ -39,6 +39,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.tvName.setText(arrayList.get(position).getName());
         holder.tvListingDate.setText(arrayList.get(position).getListingDate());
         holder.tvSubscriptDate.setText(arrayList.get(position).getSubscriptDate());
+
         int randomNum = (int)(Math.random() * 10);
         if(randomNum < 5){
             holder.linearlayout.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.shape_yellow));
@@ -70,6 +71,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             this.tvSubscriptDate = itemView.findViewById(R.id.tvSubscriptDate);
             this.tvListingDate = itemView.findViewById(R.id.tvListingDate);
             this.linearlayout = itemView.findViewById(R.id.linearlayout);
+
 
         }
     }
