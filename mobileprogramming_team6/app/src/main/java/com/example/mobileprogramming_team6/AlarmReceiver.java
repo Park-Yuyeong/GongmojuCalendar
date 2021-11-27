@@ -48,7 +48,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         builder.setSmallIcon(R.drawable.ic_baseline_notifications_24)
                 .setContentText("공모주 일정 알림")
-                .setContentText("내일 공모주 일정이 있습니다") // 가능하면 청약일, 상장일 알림 문구를 다르게 하고 싶음
+                .setContentText("새로운 공모주 일정이 있습니다") // 가능하면 청약일, 상장일 알림 문구를 다르게 하고 싶음
                 .setAutoCancel(true) // 알림 클릭시 해당 페이지로 이동하며 알림 자동 삭제
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT) // 중요도 설정, 안드로이드 7.1 이하 버전에서만 사용
                 .setContentIntent(pendingIntent)

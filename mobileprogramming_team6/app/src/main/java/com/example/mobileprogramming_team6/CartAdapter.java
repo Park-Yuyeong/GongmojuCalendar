@@ -34,13 +34,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private Context context;
 
     // 알림 기능 구현 시 필요한 변수들
-    private AlarmManager alarmManager;
+    //private AlarmManager alarmManager;
+    private AlarmManager am_list;
+    private AlarmManager am_subs;
     private GregorianCalendar mCalendar;
 
     private NotificationManager notificationManager;
     NotificationCompat.Builder builder;
 
     String date = "2021-11-25"; // 임의의 날짜 설정
+    String listDate; // 상장일 string
+    String subsDate; // 청약일 string
 
     // 알림 상태 저장 prefences
     SharedPreferences pref;
@@ -91,13 +95,46 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.btnNoti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                listDate = makeDateString(2021, 10, Integer.parseInt(holder.tvListingDate.getText().toString()));
+                subsDate = makeDateString(2021, 11, Integer.parseInt(holder.tvSubscriptDate.getText().toString()));
+
                 if (holder.btnNoti.isSelected()){
+                    if (am_list == null && am_subs == null){
+                        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                        am_list = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                        am_subs = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+                        mCalendar = new GregorianCalendar();
+
+                        Log.d("string?", holder.tvListingDate.getText().toString());
+
+                        setAlarm_list();
+                        setAlarm_subs();
+                    }
+                    else if (am_list == null){
+                        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                        am_subs = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+                        mCalendar = new GregorianCalendar();
+
+                        Log.d("string?", holder.tvListingDate.getText().toString());
+
+                        setAlarm_subs();
+                    }
                     holder.btnNoti.setSelected(false);
 
                     editor.putBoolean(holder.tvName.getText().toString(), false);
                     editor.commit();
 
-                    cancelAlarm();
+                    if (am_list == null){
+                        cancelAlarm_subs();
+                    }
+                    else{
+                        cancelAlarm_list();
+                        cancelAlarm_subs();
+                    }
                 }
                 else{
                     holder.btnNoti.setSelected(true);
@@ -107,11 +144,32 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
                     notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-                    alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                    am_list = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                    am_subs = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
                     mCalendar = new GregorianCalendar();
 
-                    setAlarm();
+                    Log.d("string?", holder.tvListingDate.getText().toString());
+                    setAlarm_list();
+                    setAlarm_subs();
+
+                    try {
+                        if(!nowCompare(subsDate)){
+                            cancelAlarm_list();
+                            cancelAlarm_subs();
+                            return;
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        if (!nowCompare(listDate)){
+                            cancelAlarm_list();
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -141,16 +199,50 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         }
     }
 
-    // 알림 on
-    private void setAlarm(){
+    private String makeDateString(int year, int month, int day){
+        month += 1;
+        date = year + "-" + month + "-"+ day;
+        return date;
+    }
+
+    private boolean nowCompare(String date) throws ParseException {
+        long now = System.currentTimeMillis();
+        Date nowDate = new Date(now);
+        Date comparedate = null;
+
+        SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        String nowFormat = dataFormat.format(nowDate);
+
+        Log.d("currentTime", "현재 시각: " + nowFormat);
+
+        try {
+            comparedate = dataFormat.parse(date);
+            nowDate = dataFormat.parse(nowFormat);
+        } catch (ParseException e){
+            e.printStackTrace();;
+        }
+
+        int compare = nowDate.compareTo(comparedate);
+
+        if (compare >= 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    // 청약일 알림 on
+    private void setAlarm_list(){
         // AlarmReceiver에 값 전달
         Intent receiverIntent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, receiverIntent, 0);
 
         Log.d("setAlarm", "setAlarm() start!!");
 
-        String form = date + " 16:10:00"; // test
-        // String form = date + " 22:00:00"; // 실제 구현시 알람이 울리는 시각
+        //String form = date + " 16:10:00"; // test
+        String form = listDate + " 22:00:00"; // 실제 구현시 알람이 울리는 시각
 
         // 날짜 포맷을 바꿔주는 소스코드
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -166,11 +258,39 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         Log.d("setAlarm", form + "에 알람 울림!");
 
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+        am_list.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
-    // 알람 off
-    private void cancelAlarm(){
+    // 상장일 알림 on
+    private void setAlarm_subs(){
+        // AlarmReceiver에 값 전달
+        Intent receiverIntent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, receiverIntent, 0);
+
+        Log.d("setAlarm", "setAlarm() start!!");
+
+        //String form = date + " 16:10:00"; // test
+        String form = subsDate + " 22:00:00"; // 실제 구현시 알람이 울리는 시각
+
+        // 날짜 포맷을 바꿔주는 소스코드
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date datetime = null;
+        try{
+            datetime = dateFormat.parse(form);
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(datetime);
+
+        Log.d("setAlarm", form + "에 알람 울림!");
+
+        am_subs.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    // 청약일 알람 off
+    private void cancelAlarm_list(){
         Intent cancelIntent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, cancelIntent, 0);
 
@@ -178,6 +298,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         Log.d("setAlarm", "알림 해제!!");
 
-        alarmManager.cancel(pendingIntent);
+        am_list.cancel(pendingIntent);
+    }
+
+    // 상장일 알람 off
+    private void cancelAlarm_subs(){
+        Intent cancelIntent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, cancelIntent, 0);
+
+        Log.d("cancelAlarm", "cancelAlarm() start!!");
+
+        Log.d("setAlarm", "알림 해제!!");
+
+        am_subs.cancel(pendingIntent);
     }
 }
