@@ -1,3 +1,4 @@
+/*
 package com.example.mobileprogramming_team6;
 
 import android.app.Activity;
@@ -99,3 +100,4 @@ public class AlarmActivity extends AppCompatActivity {
         alarmManager.cancel(pendingIntent);
     }
 }
+*/

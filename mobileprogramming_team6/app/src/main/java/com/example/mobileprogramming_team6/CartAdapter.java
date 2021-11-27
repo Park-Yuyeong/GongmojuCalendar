@@ -171,6 +171,22 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 }
             }
         });
+
+        // 관심종목에서 삭제
+        holder.btnDel.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (am_list != null && holder.btnNoti.isSelected()){
+                    cancelAlarm_list();
+                }
+                if (am_subs != null && holder.btnNoti.isSelected()){
+                    cancelAlarm_subs();
+                }
+                arrayList.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+                notifyItemRangeChanged(holder.getAdapterPosition(), arrayList.size());
+            }
+        });
     }
 
     @Override
@@ -186,6 +202,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         LinearLayout linearlayout;
 
         Button btnNoti; // 알림 버튼
+        Button btnDel; // 관심종목 삭제 버튼
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -196,6 +213,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
 
             this.btnNoti = itemView.findViewById(R.id.btnNoti);
+            this.btnDel = itemView.findViewById(R.id.btnDel);
         }
     }
 
