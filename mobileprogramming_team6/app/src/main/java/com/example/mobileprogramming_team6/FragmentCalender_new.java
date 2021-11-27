@@ -31,7 +31,7 @@ import java.util.Collection;
 public class FragmentCalender_new extends Fragment {
     ArrayList<CalendarDay> dates = new ArrayList<>(); //날짜를 저장하는 리스트(시작,끝,시작,끝,시작,끝)
     ArrayList<CalendarDay> dates_1 = new ArrayList<>(); //날짜를 저장하는 리스트
-    ArrayList<Integer> colors = new ArrayList<>(); //그에대한 색깔을 저장하는 리스트
+//    ArrayList<Integer> colors = new ArrayList<>(); //그에대한 색깔을 저장하는 리스트
     ArrayList<String> names = new ArrayList<>();//회사 이름 리스트 (회사1, 회사1, 회사2, 회사2, 회사3, 회사3 ...)
     ArrayList<CalendarDay> dates_2 = new ArrayList<>(); //상장일을 저장하는 리스트(상장1, 상장1, 상장2, 상장2, 상장3, 상장3.....)
     Collection<Eventdecorator> e = new ArrayList<>(); //eventdecorator 저장하는 리스트
@@ -99,39 +99,31 @@ public class FragmentCalender_new extends Fragment {
                     if(dateListingDay != 0){
                         adddate2(2021, dateMonth, dateListingDay);
                     }
-                    if(dateListingDay != 0){
-                        adddate(2021, dateMonth, dateSubscriptDay);
+                    if(dateSubscriptDay != 0){
                         adddate(2021, dateMonth, dateSubscriptDay-1);
+                        adddate(2021, dateMonth, dateSubscriptDay);
+
                     }
                 }
-                for(int i = 0; i<dates.size(); i++) {
-                    colors.add(Color.rgb(50*i, 20*i, 30*i));
-//                    colors.add(Color.rgb(255, 204, 255));
-//                    colors.add(Color.rgb(255, 255, 153));
-//                    colors.add(Color.rgb(255, 255, 153));
-//                    colors.add(Color.rgb(204, 204, 255));
-//                    colors.add(Color.RED);
-//                    colors.add(Color.YELLOW);
-//                    colors.add(Color.YELLOW);
-                }
-                for(int i = 0 ; i < dates.size()-1; i ++){
+                for(int i = 0 ; i < dates.size()-1; i++){
                     if (i%2 == 0 ){
                         ArrayList<CalendarDay> dates1 = new ArrayList<>();
                         dates1.add(dates.get(i));
                         dates1.add(dates.get(i+1));
-                        Log.d("hello", dates1.toString());
-                        Log.d("hello", colors.get(i).toString());
-                        Eventdecorator e1 = new Eventdecorator(colors.get(i), dates1);
+//                        Log.d("hello", dates1.toString());
+//                        Log.d("hello", colors.get(i).toString());
+                        Eventdecorator e1 = new Eventdecorator(Color.BLUE, dates1);
                         e.add(e1);
 
                         materialCalendarView.addDecorators(e);
                         Log.d("hello", e.toString());
                     }
-
                 }
+
                 for(int i = 0; i<dates_2.size(); i++){
                     ArrayList<CalendarDay> dates1 = new ArrayList<>();
-                    Eventdecorator e1 = new Eventdecorator(colors.get(i), dates1);
+                    dates1.add(dates_2.get(i));
+                    Eventdecorator e1 = new Eventdecorator(Color.RED, dates1);
                     e.add(e1);
                     materialCalendarView.addDecorators(e);
                 }
@@ -157,31 +149,6 @@ public class FragmentCalender_new extends Fragment {
         tv_selected_date = (TextView)rootView.findViewById(R.id.tv_selected_date);
 
 
-//        colors.add(Color.rgb(255, 204, 255));
-//        colors.add(Color.rgb(255, 204, 255));
-//        colors.add(Color.rgb(255, 255, 153));
-//        colors.add(Color.rgb(255, 255, 153));
-//        colors.add(Color.rgb(204, 204, 255));
-//        colors.add(Color.RED);
-//        colors.add(Color.YELLOW);
-//        colors.add(Color.YELLOW);
-//
-//        adddate(2021,10,11);
-//        adddate(2021, 10, 10);
-//        adddate(2021, 11, 10);
-//        adddate(2021, 11, 11);
-//        adddate(2021, 11, 11);
-//        adddate(2021,11,12);
-//
-//
-//        adddate2(2021, 10, 10);
-//        adddate2(2021, 10, 10);
-//        adddate2(2021, 10 , 11);
-//        adddate2(2021, 10 , 11);
-//        adddate2(2021, 10 , 11);
-//        adddate2(2021, 10 , 11);
-
-
         names.add("NH");
         names.add("NH");
         names.add("카카오");
@@ -189,8 +156,20 @@ public class FragmentCalender_new extends Fragment {
         names.add("daum");
         names.add("daum");
         
-        //DB에서 데이터를 가져와서 달력에 찍어주는 함수//
-        dbRef("10");
+        //DB에서 데이터를 가져와서 1~12달력에 찍어주는 함수//
+//        dbRef("1");
+//        dbRef("2");
+//        dbRef("3");
+//        dbRef("4");
+//        dbRef("5");
+//        dbRef("6");
+//        dbRef("7");
+//        dbRef("8");
+//        dbRef("9");
+//        dbRef("10");
+        dbRef("11");
+        dbRef("12");
+
 
         c = new ArrayList<>();
 
@@ -212,23 +191,6 @@ public class FragmentCalender_new extends Fragment {
 
         adapter.notifyDataSetChanged();
 
-
-
-        for(int i = 0 ; i < dates.size()-1; i ++){
-            if (i%2 == 0 ){
-                ArrayList<CalendarDay> dates1 = new ArrayList<>();
-                dates1.add(dates.get(i));
-                dates1.add(dates.get(i+1));
-                Log.d("hello", dates1.toString());
-                Log.d("hello", colors.get(i).toString());
-                Eventdecorator e1 = new Eventdecorator(colors.get(i), dates1);
-                e.add(e1);
-
-                materialCalendarView.addDecorators(e);
-                Log.d("hello", e.toString());
-            }
-
-        }
 
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
