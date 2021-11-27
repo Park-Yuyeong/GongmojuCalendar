@@ -5,7 +5,9 @@ public class Stock {
     private String listingDate; // 상장일
     private String subscriptDate; // 청약일
 
-    public Stock(){}
+    public Stock() {
+
+    }
 
     public String getListingDate() {
         return listingDate;
