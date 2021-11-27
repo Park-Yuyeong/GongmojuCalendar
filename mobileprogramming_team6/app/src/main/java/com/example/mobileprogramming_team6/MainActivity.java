@@ -202,6 +202,8 @@ public class MainActivity extends AppCompatActivity {
 
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
+    // 관심종목에 이름 클릭시 사이트로 이동
+    // 기업정보 사이트로 이동
 
     public void btn(View view){
 
