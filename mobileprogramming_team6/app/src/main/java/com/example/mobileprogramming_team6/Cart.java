@@ -17,6 +17,7 @@ public class Cart {
     public void setName(String name) {
         this.Name = name;
     }
+
     public String getListingDate() {
         return listingDate;
     }
@@ -32,5 +33,8 @@ public class Cart {
     public void setSubscriptDate(String subscriptDate) {
         this.subscriptDate = subscriptDate;
     }
+
+
+
 }
 
