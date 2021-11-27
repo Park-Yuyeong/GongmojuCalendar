@@ -14,8 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
@@ -70,6 +73,81 @@ public class FragmentCalender_new extends Fragment {
 
 
     }
+
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+
+    //데이터베이스 연동, 연결//
+     void dbRef(String month){
+        database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
+
+        databaseReference = database.getReference("2021년 청약일정/"+ month); // DB 테이블 연결
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Stock stock = snapshot.getValue(Stock.class);
+                    int dateMonth =  Integer.parseInt(month)-1;
+                    int dateListingDay =  Integer.parseInt(stock.getListingDate());
+                    int dateSubscriptDay =  Integer.parseInt(stock.getSubscriptDate());
+                    Log.d("month", String.valueOf(dateMonth));
+                    Log.d("ListingDay", String.valueOf(dateListingDay));
+                    Log.d("SubscriptDay", String.valueOf(dateSubscriptDay));
+
+                    if(dateListingDay != 0){
+                        adddate2(2021, dateMonth, dateListingDay);
+                    }
+                    if(dateListingDay != 0){
+                        adddate(2021, dateMonth, dateSubscriptDay);
+                        adddate(2021, dateMonth, dateSubscriptDay-1);
+                    }
+                }
+                for(int i = 0; i<dates.size(); i++) {
+                    colors.add(Color.rgb(50*i, 20*i, 30*i));
+//                    colors.add(Color.rgb(255, 204, 255));
+//                    colors.add(Color.rgb(255, 255, 153));
+//                    colors.add(Color.rgb(255, 255, 153));
+//                    colors.add(Color.rgb(204, 204, 255));
+//                    colors.add(Color.RED);
+//                    colors.add(Color.YELLOW);
+//                    colors.add(Color.YELLOW);
+                }
+                for(int i = 0 ; i < dates.size()-1; i ++){
+                    if (i%2 == 0 ){
+                        ArrayList<CalendarDay> dates1 = new ArrayList<>();
+                        dates1.add(dates.get(i));
+                        dates1.add(dates.get(i+1));
+                        Log.d("hello", dates1.toString());
+                        Log.d("hello", colors.get(i).toString());
+                        Eventdecorator e1 = new Eventdecorator(colors.get(i), dates1);
+                        e.add(e1);
+
+                        materialCalendarView.addDecorators(e);
+                        Log.d("hello", e.toString());
+                    }
+
+                }
+                for(int i = 0; i<dates_2.size(); i++){
+                    ArrayList<CalendarDay> dates1 = new ArrayList<>();
+                    Eventdecorator e1 = new Eventdecorator(colors.get(i), dates1);
+                    e.add(e1);
+                    materialCalendarView.addDecorators(e);
+                }
+
+
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //디비를 가져오던중 에러 발생 시
+                Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+            }
+        });
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,30 +157,29 @@ public class FragmentCalender_new extends Fragment {
         tv_selected_date = (TextView)rootView.findViewById(R.id.tv_selected_date);
 
 
-        colors.add(Color.rgb(255,204,255));
-        colors.add(Color.rgb(255,204,255));
-        colors.add(Color.rgb(255,255,153));
-        colors.add(Color.rgb(255,255,153));
-        colors.add(Color.rgb(204,204,255));
-        colors.add(Color.RED);
-        colors.add(Color.YELLOW);
-        colors.add(Color.YELLOW);
-
-
-        adddate(2021,10,11);
-        adddate(2021, 10, 10);
-        adddate(2021, 11, 10);
-        adddate(2021, 11, 11);
-        adddate(2021, 11, 11);
-        adddate(2021,11,12);
-
-
-        adddate2(2021, 10, 10);
-        adddate2(2021, 10, 10);
-        adddate2(2021, 10 , 11);
-        adddate2(2021, 10 , 11);
-        adddate2(2021, 10 , 11);
-        adddate2(2021, 10 , 11);
+//        colors.add(Color.rgb(255, 204, 255));
+//        colors.add(Color.rgb(255, 204, 255));
+//        colors.add(Color.rgb(255, 255, 153));
+//        colors.add(Color.rgb(255, 255, 153));
+//        colors.add(Color.rgb(204, 204, 255));
+//        colors.add(Color.RED);
+//        colors.add(Color.YELLOW);
+//        colors.add(Color.YELLOW);
+//
+//        adddate(2021,10,11);
+//        adddate(2021, 10, 10);
+//        adddate(2021, 11, 10);
+//        adddate(2021, 11, 11);
+//        adddate(2021, 11, 11);
+//        adddate(2021,11,12);
+//
+//
+//        adddate2(2021, 10, 10);
+//        adddate2(2021, 10, 10);
+//        adddate2(2021, 10 , 11);
+//        adddate2(2021, 10 , 11);
+//        adddate2(2021, 10 , 11);
+//        adddate2(2021, 10 , 11);
 
 
         names.add("NH");
@@ -111,6 +188,9 @@ public class FragmentCalender_new extends Fragment {
         names.add("카카오");
         names.add("daum");
         names.add("daum");
+        
+        //DB에서 데이터를 가져와서 달력에 찍어주는 함수//
+        dbRef("10");
 
         c = new ArrayList<>();
 
@@ -122,10 +202,15 @@ public class FragmentCalender_new extends Fragment {
 
         adapter = new CalenderCartAdapter(c, getActivity());
         recyclerView.setAdapter(adapter);
-
+        recyclerView.setLayoutManager(layoutManager);
 
         adapter.notifyDataSetChanged();
 
+        adapter = new CalenderCartAdapter(c, getActivity());
+        recyclerView.setAdapter(adapter);
+
+
+        adapter.notifyDataSetChanged();
 
 
 
@@ -173,8 +258,6 @@ public class FragmentCalender_new extends Fragment {
 //        adapter.notifyDataSetChanged();
 //        adapter = new CalenderCartAdapter(c, getActivity());
 //        recyclerView.setAdapter(adapter);
-
-
 
 
 
