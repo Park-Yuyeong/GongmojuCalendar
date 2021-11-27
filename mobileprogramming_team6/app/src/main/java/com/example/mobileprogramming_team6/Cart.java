@@ -10,13 +10,7 @@ public class Cart {
     public Cart() {
 
     }
-    public String getMonth() {
-        return Month;
-    }
 
-    public void setMonth(String month) {
-        Month = month;
-    }
 
     public String getName() {
         return Name;
@@ -33,6 +27,15 @@ public class Cart {
     public void setListingDate(String listingDate) {
         this.listingDate = listingDate;
     }
+
+    public String getMonth() {
+        return Month;
+    }
+
+    public void setMonth(String month) {
+        this.Month = month;
+    }
+
 
     public String getSubscriptDate() {
         return subscriptDate;

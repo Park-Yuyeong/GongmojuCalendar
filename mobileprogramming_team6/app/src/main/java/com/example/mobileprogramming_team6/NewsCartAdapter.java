@@ -1,6 +1,7 @@
 package com.example.mobileprogramming_team6;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,12 @@ public class NewsCartAdapter extends RecyclerView.Adapter<NewsCartAdapter.NewsCa
     private ArrayList<Cart> arrayList;
     private Context context;
 
+    String plusoneday(String date){
+        String day = date.substring(7,8);
+        int day2 = Integer.parseInt(day);
+        day2 += 1;
+        return String.valueOf(day2);
+    }
 
     public NewsCartAdapter(ArrayList<Cart> arrayList , Context context){
 
@@ -37,8 +44,8 @@ public class NewsCartAdapter extends RecyclerView.Adapter<NewsCartAdapter.NewsCa
     public void onBindViewHolder(@NonNull NewsCartViewHolder holder, int position) {
 
         holder.tvName.setText(arrayList.get(position).getName());
-        holder.tvListingDate.setText(arrayList.get(position).getListingDate());
         holder.tvSubscriptDate.setText(arrayList.get(position).getSubscriptDate());
+        holder.tvListingDate.setText(arrayList.get(position).getListingDate());
 
     }
 
