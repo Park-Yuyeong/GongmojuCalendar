@@ -5,7 +5,6 @@ public class Cart {
     private String Name; // 기업명
     private String listingDate; // 상장일
     private String subscriptDate; // 청약일
-    private static String Infor; // 기업정보
 
     public Cart(){}
 
