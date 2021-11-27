@@ -6,6 +6,7 @@ public class Cart {
     private String Month; // 월
     private String listingDate; // 상장일
     private String subscriptDate; // 청약일
+    private String infor; // 기업정보
 
     public Cart() {
 
@@ -42,6 +43,9 @@ public class Cart {
         this.subscriptDate = subscriptDate;
     }
 
+    public String getInfor() { return infor; }
+
+    public void setInfor(String infor) { this.infor = infor;}
 
 
 }
