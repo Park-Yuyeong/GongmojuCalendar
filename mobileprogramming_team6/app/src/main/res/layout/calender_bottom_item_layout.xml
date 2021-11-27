@@ -34,7 +34,13 @@
             android:layout_weight="1"/>
 
 
+
     </LinearLayout>
+    <Button
+        android:layout_width="0dp"
+        android:background="@drawable/ic_baseline_add_box_24"
+        android:layout_height="match_parent"
+        android:layout_weight="2"/>
 
 
 </LinearLayout>
