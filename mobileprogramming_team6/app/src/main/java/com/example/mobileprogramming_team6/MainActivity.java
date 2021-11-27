@@ -42,6 +42,55 @@ public class MainActivity extends AppCompatActivity {
     //private FragmentCalender fragmentCalender = new FragmentCalender();
     //private FragmentCart fragmentCart = new FragmentCart();
     //private FragmentCalender_new fragmentCalender_new = new FragmentCalender_new();
+<<<<<<< HEAD
+=======
+
+    //객체를 담을 Array배열 선언//
+    private ArrayList<Stock> arrayList1;
+    private ArrayList<Stock> arrayList2;
+    private ArrayList<Stock> arrayList3;
+    private ArrayList<Stock> arrayList4;
+    private ArrayList<Stock> arrayList5;
+    private ArrayList<Stock> arrayList6;
+    private ArrayList<Stock> arrayList7;
+    private ArrayList<Stock> arrayList8;
+    private ArrayList<Stock> arrayList9;
+    private ArrayList<Stock> arrayList10;
+    private ArrayList<Stock> arrayList11;
+    private ArrayList<Stock> arrayList12;
+
+
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+
+    //데이터베이스 연동, 연결//
+     void dbRef(ArrayList<Stock> arr, String month){
+        database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
+
+        databaseReference = database.getReference("2021년 청약일정/"+ month); // DB 테이블 연결
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                arr.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Log.d("Data", snapshot.toString());
+                    Stock stock = snapshot.getValue(Stock.class); // 만들어뒀던 Stock 객체에 데이터를 담는다
+
+                    arr.add(stock); // 담은 데이터들을 배열리스트에 넣는다
+                }
+                Log.d("Database", "Value is: " + arr.toString());
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //디비를 가져오던중 에러 발생 시
+                Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+            }
+        });
+    }
+>>>>>>> 537614a312ed55c5c2520cadf89a7af52fa0f657
 
 
     @Override
@@ -52,6 +101,42 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         fragmentNews = new FragmentNews();
+<<<<<<< HEAD
+=======
+
+        transaction.replace(R.id.frameLayout, fragmentNews).commit();
+        //transaction.replace(R.id.frameLayout, fragmentNews).commitAllowingStateLoss();
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
+
+        arrayList1 = new ArrayList<>(); // Stock객체를 담을 배열 리스트 ex)arrayList1은 1월달 공모주
+        arrayList2 = new ArrayList<>();
+        arrayList3 = new ArrayList<>();
+        arrayList4 = new ArrayList<>();
+        arrayList5 = new ArrayList<>();
+        arrayList6 = new ArrayList<>();
+        arrayList7 = new ArrayList<>();
+        arrayList8 = new ArrayList<>();
+        arrayList9 = new ArrayList<>();
+        arrayList10 = new ArrayList<>();
+        arrayList11 = new ArrayList<>();
+        arrayList12 = new ArrayList<>();
+
+        dbRef(arrayList1, "1월");
+        dbRef(arrayList2, "2월");
+        dbRef(arrayList3, "3월");
+        dbRef(arrayList4, "4월");
+        dbRef(arrayList5, "5월");
+        dbRef(arrayList6, "6월");
+        dbRef(arrayList7, "7월");
+        dbRef(arrayList8, "8월");
+        dbRef(arrayList9, "9월");
+        dbRef(arrayList10, "10월");
+        dbRef(arrayList11, "11월");
+        dbRef(arrayList12, "12월");
+
+        Log.d("hhhhhhhh", arrayList1.toString());
+>>>>>>> 537614a312ed55c5c2520cadf89a7af52fa0f657
 
         transaction.replace(R.id.frameLayout, fragmentNews).commit();
         //transaction.replace(R.id.frameLayout, fragmentNews).commitAllowingStateLoss();
