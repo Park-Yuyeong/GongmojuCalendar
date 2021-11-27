@@ -21,6 +21,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     // 알림 기능 구현 시 필요한 변수들
     //private AlarmManager alarmManager;
     private AlarmManager am_list;
-    private AlarmManager am_subs;
+    //private AlarmManager am_subs;
     private GregorianCalendar mCalendar;
 
     private NotificationManager notificationManager;
@@ -44,7 +46,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     String date = "2021-11-25"; // 임의의 날짜 설정
     String listDate; // 상장일 string
-    String subsDate; // 청약일 string
+    //String subsDate; // 청약일 string
 
     // 알림 상태 저장 prefences
     SharedPreferences pref;
@@ -94,46 +96,27 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.btnNoti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listDate = makeDateString(2021, 10, Integer.parseInt(holder.tvListingDate.getText().toString()));
-//                subsDate = makeDateString(2021, 11, Integer.parseInt(holder.tvSubscriptDate.getText().toString()));
+                listDate = holder.tvListingDate.getText().toString();
+                //listDate = makeDateString(2021, 10, Integer.parseInt(holder.tvListingDate.getText().toString()));
 
                 if (holder.btnNoti.isSelected()){
-                    if (am_list == null && am_subs == null){
+                    if (am_list == null){
                         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
                         am_list = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                        am_subs = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
                         mCalendar = new GregorianCalendar();
 
                         Log.d("string?", holder.tvListingDate.getText().toString());
 
                         setAlarm_list();
-                        setAlarm_subs();
-                    }
-                    else if (am_list == null){
-                        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-                        am_subs = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-                        mCalendar = new GregorianCalendar();
-
-                        Log.d("string?", holder.tvListingDate.getText().toString());
-
-                        setAlarm_subs();
                     }
                     holder.btnNoti.setSelected(false);
 
                     editor.putBoolean(holder.tvName.getText().toString(), false);
                     editor.commit();
 
-                    if (am_list == null){
-                        cancelAlarm_subs();
-                    }
-                    else{
-                        cancelAlarm_list();
-                        cancelAlarm_subs();
-                    }
+                    cancelAlarm_list();
                 }
                 else{
                     holder.btnNoti.setSelected(true);
@@ -144,23 +127,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
                     am_list = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                    am_subs = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                    //am_subs = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
                     mCalendar = new GregorianCalendar();
 
                     Log.d("string?", holder.tvListingDate.getText().toString());
                     setAlarm_list();
-                    setAlarm_subs();
-
-                    try {
-                        if(!nowCompare(subsDate)){
-                            cancelAlarm_list();
-                            cancelAlarm_subs();
-                            return;
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
 
                     try {
                         if (!nowCompare(listDate)){
@@ -180,9 +152,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 if (am_list != null && holder.btnNoti.isSelected()){
                     cancelAlarm_list();
                 }
-                if (am_subs != null && holder.btnNoti.isSelected()){
-                    cancelAlarm_subs();
-                }
+
+                FirebaseDatabase.getInstance().getReference("Users/user1/listingDate").child(holder.tvName.getText().toString()).removeValue();
+
                 arrayList.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
                 notifyItemRangeChanged(holder.getAdapterPosition(), arrayList.size());
@@ -281,6 +253,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     // 상장일 알림 on
+/*
     private void setAlarm_subs(){
         // AlarmReceiver에 값 전달
         Intent receiverIntent = new Intent(context, AlarmReceiver.class);
@@ -307,6 +280,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         am_subs.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
+*/
 
     // 청약일 알람 off
     private void cancelAlarm_list(){
@@ -321,7 +295,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     // 상장일 알람 off
-    private void cancelAlarm_subs(){
+/*    private void cancelAlarm_subs(){
         Intent cancelIntent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, cancelIntent, 0);
 
@@ -330,5 +304,5 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         Log.d("setAlarm", "알림 해제!!");
 
         am_subs.cancel(pendingIntent);
-    }
+    }*/
 }
