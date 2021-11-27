@@ -51,8 +51,8 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-
-            android:background="@drawable/ic_baseline_notifications_24"
+            android:id="@+id/btnNoti"
+            android:background="@drawable/ic_notifications"
             android:layout_weight="1"/>
         <Button
             android:layout_width="0dp"

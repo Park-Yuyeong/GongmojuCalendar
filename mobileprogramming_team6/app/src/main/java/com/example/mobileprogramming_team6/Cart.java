@@ -6,14 +6,16 @@ public class Cart {
     private String listingDate; // 상장일
     private String subscriptDate; // 청약일
 
-    public Cart(){}
+    public Cart() {
+
+    }
 
     public String getName() {
         return Name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.Name = name;
     }
 
     public String getListingDate() {

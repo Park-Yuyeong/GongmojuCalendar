@@ -14,6 +14,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -37,10 +38,14 @@ public class MainActivity extends AppCompatActivity {
     //프래그먼트 선언//
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private FragmentNews fragmentNews = new FragmentNews();
-    private FragmentCalender fragmentCalender = new FragmentCalender();
-    private FragmentCart fragmentCart = new FragmentCart();
-    private FragmentCalender_new fragmentCalender_new = new FragmentCalender_new();
+    private Fragment fragmentNews;
+    private Fragment fragmentCalender;
+    private Fragment fragmentCart;
+    private Fragment fragmentCalender_new;
+    //private FragmentNews fragmentNews = new FragmentNews();
+    //private FragmentCalender fragmentCalender = new FragmentCalender();
+    //private FragmentCart fragmentCart = new FragmentCart();
+    //private FragmentCalender_new fragmentCalender_new = new FragmentCalender_new();
 
     //객체를 담을 Array배열 선언//
     private ArrayList<Stock> arrayList1;
@@ -59,15 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
-
-    // 알림 코드 구현 시 필요한 변수들
-    private AlarmManager alarmManager;
-    private GregorianCalendar mCalendar;
-
-    private NotificationManager notificationManager;
-    NotificationCompat.Builder builder;
-
-    String date = "2021-11-24"; // 임의의 날짜 설정
 
     //데이터베이스 연동, 연결//
      void dbRef(ArrayList<Stock> arr, String month){
@@ -102,8 +98,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayout, fragmentNews).commitAllowingStateLoss();
+
+        fragmentNews = new FragmentNews();
+
+        transaction.replace(R.id.frameLayout, fragmentNews).commit();
+        //transaction.replace(R.id.frameLayout, fragmentNews).commitAllowingStateLoss();
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
@@ -134,22 +135,6 @@ public class MainActivity extends AppCompatActivity {
         dbRef(arrayList12, "12월");
 
         Log.d("hhhhhhhh", arrayList1.toString());
-        // notification
-        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        mCalendar = new GregorianCalendar();
-
-        // 알람 버튼, 임시(프엔 작성 후 맞게 수정)
-        //Button button = (Button) findViewById(R.id.btntest);
-        //button.setOnClickListener(new View.OnClickListener(){
-            //@Override
-            //public void onClick(View v){
-                //Log.d("button", "button click!!");
-                //setAlarm();
-            //}
-        //});
 
 
 
@@ -162,13 +147,37 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             switch(item.getItemId()){
                 case R.id.newsItem:
-                    transaction.replace(R.id.frameLayout, fragmentNews).commitAllowingStateLoss();
+                    //transaction.replace(R.id.frameLayout, fragmentNews).commitAllowingStateLoss();
+                    if (fragmentNews == null){
+                        fragmentNews = new FragmentNews();
+                        fragmentManager.beginTransaction().add(R.id.frameLayout, fragmentNews).commit();
+                    }
+
+                    if (fragmentNews != null)   fragmentManager.beginTransaction().show(fragmentNews).commit();
+                    if (fragmentCalender_new != null)   fragmentManager.beginTransaction().hide(fragmentCalender_new).commit();
+                    if (fragmentCart != null)   fragmentManager.beginTransaction().hide(fragmentCart).commit();
                     break;
                 case R.id.calenderItem:
-                    transaction.replace(R.id.frameLayout, fragmentCalender_new).commitAllowingStateLoss();
+                    //transaction.replace(R.id.frameLayout, fragmentCalender_new).commitAllowingStateLoss();
+                    if (fragmentCalender_new == null){
+                        fragmentCalender_new = new FragmentCalender_new();
+                        fragmentManager.beginTransaction().add(R.id.frameLayout, fragmentCalender_new).commit();
+                    }
+
+                    if (fragmentNews != null)   fragmentManager.beginTransaction().hide(fragmentNews).commit();
+                    if (fragmentCalender_new != null)   fragmentManager.beginTransaction().show(fragmentCalender_new).commit();
+                    if (fragmentCart != null)   fragmentManager.beginTransaction().hide(fragmentCart).commit();
                     break;
                 case R.id.cartItem:
-                    transaction.replace(R.id.frameLayout, fragmentCart).commitAllowingStateLoss();
+                    //transaction.replace(R.id.frameLayout, fragmentCart).commitAllowingStateLoss();
+                    if (fragmentCart == null){
+                        fragmentCart = new FragmentCart();
+                        fragmentManager.beginTransaction().add(R.id.frameLayout, fragmentCart).commit();
+                    }
+
+                    if (fragmentNews != null)   fragmentManager.beginTransaction().hide(fragmentNews).commit();
+                    if (fragmentCalender_new != null)   fragmentManager.beginTransaction().hide(fragmentCalender_new).commit();
+                    if (fragmentCart != null)   fragmentManager.beginTransaction().show(fragmentCart).commit();
                     break;
 
             }
@@ -176,34 +185,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // 알림 ON
-    private void setAlarm(){
-        // AlarmReceiver에 값 전달
-        Intent receiverIntent = new Intent(MainActivity.this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, receiverIntent, 0);
-
-        Log.d("setAlarm", "setAlarm() start!!");
-
-        String form = date + " 10:49:30"; // test
-        // String form = date + " 22:00:00"; // 실제 구현시 알람이 울리는 시각
-
-        // 날짜 포맷을 바꿔주는 소스코드
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date datetime = null;
-        try{
-            datetime = dateFormat.parse(form);
-        } catch (ParseException e){
-            e.printStackTrace();
-        }
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(datetime);
-
-        Log.d("setAlarm", form + "에 알람 울림!");
-
-
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
-    }
 
     //관심종목의 기업이름 크릭시 사이트로 이동
 

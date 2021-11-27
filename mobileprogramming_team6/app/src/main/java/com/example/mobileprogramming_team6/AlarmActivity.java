@@ -27,7 +27,10 @@ public class AlarmActivity extends AppCompatActivity {
     private NotificationManager notificationManager;
     NotificationCompat.Builder builder;
 
-    String date = "2021-11-24"; // 임의의 날짜 설정정
+    String date = "2021-11-24"; // 임의의 날짜 설정
+
+    // 실제 앱 실행시에는 사용되지 않는 클래스
+    // CartAdapter.class에 부분부분 흩어져 있는 알림 관련 코드를 모아놨다 보면 됨
 
    @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -53,7 +56,7 @@ public class AlarmActivity extends AppCompatActivity {
             //}
        //});
 
-       //setAlarm(); // 왜 안되는가..?
+       //setAlarm();
     }
 
     // 알림 on
