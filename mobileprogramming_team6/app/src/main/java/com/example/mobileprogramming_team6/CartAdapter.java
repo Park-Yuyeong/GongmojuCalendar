@@ -99,10 +99,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 subsDate = holder.tvSubscriptDate.getText().toString();
                 //listDate = makeDateString(2021, 10, Integer.parseInt(holder.tvListingDate.getText().toString()));
                 //subsDate = makeDateString(2021, 11, Integer.parseInt(holder.tvSubscriptDate.getText().toString()));
-                if (listDate == "0") { // 상장일이 0값일 때
+                if (listDate == null) { // 상장일이 0값일 때
                     listDate = date;
                 }
-                if (subsDate == "0"){ // 청약일이 0값일 떄
+                if (subsDate == null){ // 청약일이 0값일 떄
                     subsDate = date;
                 }
                 else{

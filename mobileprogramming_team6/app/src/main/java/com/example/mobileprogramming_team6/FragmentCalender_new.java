@@ -225,11 +225,17 @@ public class FragmentCalender_new extends Fragment {
         materialCalendarView = (MaterialCalendarView)rootView.findViewById(R.id.calender);
 
         Log.d("month", String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1));
+        //dbRef(String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1));
+        dbRef("11");
+        dbRef("12");
+        cartRef(Calendar.getInstance().get(Calendar.MONTH) + 1, rootView);
 
         materialCalendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
                 Log.d("month", materialCalendarView.getCurrentDate().toString());
+                //dbRef(Integer.toString(date.getMonth()+1));
+                cartRef(date.getMonth()+1, rootView);
             }
         });
 
@@ -244,11 +250,11 @@ public class FragmentCalender_new extends Fragment {
 //        dbRef("8");
 //        dbRef("9");
 //        dbRef("10");
-        dbRef("11");
-        dbRef("12");
+//        dbRef("11");
+//        dbRef("12");
 
         // 리사이클뷰로 db에서 받은 데이터를 쏴줌
-        cartRef(11, rootView);
+//        cartRef(11, rootView);
 //        cartRef(12, rootView);
 
 
