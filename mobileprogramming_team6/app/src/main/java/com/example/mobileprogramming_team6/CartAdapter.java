@@ -100,10 +100,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 subsDate = holder.tvSubscriptDate.getText().toString();
                 //listDate = makeDateString(2021, 10, Integer.parseInt(holder.tvListingDate.getText().toString()));
                 //subsDate = makeDateString(2021, 11, Integer.parseInt(holder.tvSubscriptDate.getText().toString()));
-                if (listDate == null) { // 상장일이 0값일 때
+                if (listDate == "") { // 상장일이 0값일 때
                     listDate = date;
                 }
-                if (subsDate == null){ // 청약일이 0값일 떄
+                if (subsDate == ""){ // 청약일이 0값일 떄
                     subsDate = date;
                 }
                 else{
@@ -127,7 +127,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 }
 
                 if (holder.btnNoti.isSelected()){
-                    if (am_list == null && am_subs == null){
+                    if (am_list == null || am_subs == null){
                         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
                         am_list = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -135,27 +135,27 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
                         mCalendar = new GregorianCalendar();
 
-                        setAlarm_list();
-                        setAlarm_subs();
-                    }
-                    else if (am_subs == null){
-                        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-                        am_list = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-                        mCalendar = new GregorianCalendar();
-
-                        setAlarm_list();
+                        if (am_subs != null){
+                            setAlarm_list();
+                        }
+                        else if (am_list != null){
+                            setAlarm_subs();
+                        }else{
+                            setAlarm_list();
+                            setAlarm_subs();
+                        }
                     }
                     holder.btnNoti.setSelected(false);
 
                     editor.putBoolean(holder.tvName.getText().toString(), false);
                     editor.commit();
 
-                    if (am_subs == null){
+                    if (am_subs != null){
                         cancelAlarm_list();
                     }
-                    else{
+                    else if (am_list != null){
+                        cancelAlarm_subs();
+                    }else{
                         cancelAlarm_list();
                         cancelAlarm_subs();
                     }
@@ -173,7 +173,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
                     mCalendar = new GregorianCalendar();
 
-                    Log.d("string?", holder.tvListingDate.getText().toString());
                     setAlarm_list();
                     setAlarm_subs();
 
