@@ -3,6 +3,7 @@ package com.example.mobileprogramming_team6;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,17 +58,21 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
         if(listingDay != null){
             if(listingDay.length() != 1) {
                 holder.tvDate.setText("상장일 2021-" + month + "-" + listingDay);
+                holder.tvDate.setTextColor(Color.RED);
             }
             else{
                 holder.tvDate.setText("상장일 2021-" + month + "-0" + listingDay);
+                holder.tvDate.setTextColor(Color.RED);
             }
         }
         else if(subscriptDay != null){
             if(subscriptDay.length() != 1){
                 holder.tvDate.setText("청약일 2021-" + month + "-" + subscriptDay);
+                holder.tvDate.setTextColor(Color.BLUE);
             }
             else{
                 holder.tvDate.setText("청약일 2021-" + month + "-0" + subscriptDay);
+                holder.tvDate.setTextColor(Color.BLUE);
             }
         }
         database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동

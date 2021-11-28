@@ -24,38 +24,42 @@
         android:layout_height="0dp"
         android:textSize="15dp"
         android:textColor="#000000"
+        android:gravity="center_vertical"
         android:text="         회원님의 공모주 일정"
 
+        android:layout_weight="1.5"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:text="           종목명                    청약일                상장일"
+        android:layout_height="0dp"
         android:layout_weight="1"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="30dp"
         android:id="@+id/recyclerView2"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginRight="30dp"
-        android:layout_weight="9"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="8"/>
 
-        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.2"
-        android:textColor="#000000"
-        android:textSize="15dp"
         android:text="         다른 공모주 일정"
-        />
+        android:textColor="#000000"
+        android:textSize="17dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_marginLeft="30dp"
         android:layout_height="0dp"
         android:id="@+id/recyclerView_other"
         android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="10"/>
 

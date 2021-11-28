@@ -42,6 +42,7 @@ public class FragmentNews extends Fragment {
     private FirebaseDatabase database2;
     private DatabaseReference databaseReference2;
 
+
     LocalDateTime now = LocalDateTime.now();
 
 
@@ -52,6 +53,7 @@ public class FragmentNews extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_news, container, false) ;
+
 
         String today_day = String.valueOf(now.getDayOfMonth());
         String today_dayminus1 = String.valueOf(now.getDayOfMonth()-1);
