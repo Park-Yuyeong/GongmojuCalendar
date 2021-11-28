@@ -5,15 +5,18 @@ import static java.security.AccessController.getContext;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.security.AccessControlContext;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class NewsCartAdapter extends RecyclerView.Adapter<NewsCartAdapter.NewsCartViewHolder> {
@@ -21,6 +24,9 @@ public class NewsCartAdapter extends RecyclerView.Adapter<NewsCartAdapter.NewsCa
 
     private ArrayList<Cart> arrayList;
     private Context context;
+    LocalDateTime now = LocalDateTime.now();
+    String today_day = String.valueOf(now.getDayOfMonth());
+    String today_dayminus1 = String.valueOf(now.getDayOfMonth()-1);
 
 
 
@@ -45,8 +51,25 @@ public class NewsCartAdapter extends RecyclerView.Adapter<NewsCartAdapter.NewsCa
     public void onBindViewHolder(@NonNull NewsCartViewHolder holder, int position) {
 
         holder.tvName.setText(arrayList.get(position).getName());
-        holder.tvListingDate.setText(arrayList.get(position).getListingDate());
-        holder.tvSubscriptDate.setText(arrayList.get(position).getSubscriptDate());
+        holder.tvListingDate.setText(arrayList.get(position).getSubscriptDate());
+        holder.tvSubscriptDate.setText(arrayList.get(position).getListingDate());
+        if(arrayList.get(position).getListingDate().length() < 3){
+            if(holder.tvListingDate.getText().equals(today_day)) {
+                holder.tvSubscriptDate.setText("                   청약");
+                holder.tvSubscriptDate.setTextColor(Color.rgb(102,153,255));
+                holder.tvSubscriptDate.setTextSize(14);
+                holder.tvListingDate.setText("");
+
+            }
+            if(holder.tvSubscriptDate.getText().equals(today_day)) {
+                holder.tvSubscriptDate.setText("                   상장");
+                holder.tvSubscriptDate.setTextColor(Color.rgb(225, 102, 102));
+                holder.tvSubscriptDate.setTextSize(14);
+                holder.tvListingDate.setText("");
+
+            }
+        }
+
 
     }
 

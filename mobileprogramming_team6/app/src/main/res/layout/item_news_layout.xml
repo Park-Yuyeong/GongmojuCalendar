@@ -25,10 +25,11 @@
             android:textSize="15dp"
             android:id="@+id/tvName"
             android:text="hi"
+            android:gravity="center_vertical"
             android:textColor="#000000"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"/>
+            android:layout_weight="3"/>
         <TextView
 
             android:id="@+id/tvSubscriptDate"
@@ -43,6 +44,7 @@
 
             android:textColor="#000000"
             android:textSize="13dp"
+
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"/>
