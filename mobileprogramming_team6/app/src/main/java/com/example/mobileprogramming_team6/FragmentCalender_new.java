@@ -161,6 +161,7 @@ public class FragmentCalender_new extends Fragment {
 
                             if(date.getDay() == dateListingDay && date.getMonth() == dateMonth){
                                 Cart c1 = new Cart();
+//
                                 c1.setListingDate(stock.getListingDate());
                                 c1.setMonth(Integer.toString(date.getMonth()+1));
                                 c1.setName(name);
@@ -168,6 +169,7 @@ public class FragmentCalender_new extends Fragment {
                             }
                             if(date.getDay() == dateSubscriptDay-1 && date.getMonth() == dateMonth){
                                 Cart c1 = new Cart();
+//
                                 c1.setSubscriptDate(Integer.toString(date.getDay()));
                                 c1.setMonth(Integer.toString(date.getMonth()+1));
                                 c1.setName(name);
@@ -177,6 +179,7 @@ public class FragmentCalender_new extends Fragment {
 
                             if(date.getDay() == dateSubscriptDay && date.getMonth() == dateMonth){
                                 Cart c1 = new Cart();
+//
                                 c1.setSubscriptDate(Integer.toString(date.getDay()));
                                 c1.setMonth(Integer.toString(date.getMonth()+1));
                                 c1.setName(name);
