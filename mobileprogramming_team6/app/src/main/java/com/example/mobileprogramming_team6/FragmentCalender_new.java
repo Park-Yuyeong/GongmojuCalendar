@@ -111,7 +111,6 @@ public class FragmentCalender_new extends Fragment {
 
                     }
 
-                    // month 가 11월 12 월 일때 info 정보 받아오기
                     
                 }
 
