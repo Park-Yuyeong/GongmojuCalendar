@@ -3,17 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-
         <entry key="..\:/Local/GongmojuCalendar/mobileprogramming_team6/app/src/main/res/layout/activity_main.xml" value="0.21944444444444444" />
         <entry key="..\:/Local/GongmojuCalendar/mobileprogramming_team6/app/src/main/res/layout/activity_url_show.xml" value="0.2390625" />
-        <entry key="..\:/Local/GongmojuCalendar/mobileprogramming_team6/app/src/main/res/layout/calender_bottom_item_layout.xml" value="0.25364583333333335" />
         <entry key="..\:/Local/GongmojuCalendar/mobileprogramming_team6/app/src/main/res/layout/fragment_calender.xml" value="0.25364583333333335" />
         <entry key="..\:/Local/GongmojuCalendar/mobileprogramming_team6/app/src/main/res/layout/fragment_calender_new.xml" value="0.25364583333333335" />
         <entry key="..\:/Local/GongmojuCalendar/mobileprogramming_team6/app/src/main/res/layout/fragment_cart.xml" value="0.25364583333333335" />
         <entry key="..\:/Local/GongmojuCalendar/mobileprogramming_team6/app/src/main/res/layout/fragment_news.xml" value="0.25364583333333335" />
         <entry key="..\:/Local/GongmojuCalendar/mobileprogramming_team6/app/src/main/res/layout/item_layout.xml" value="0.21944444444444444" />
-        <entry key="..\:/Local/GongmojuCalendar/mobileprogramming_team6/app/src/main/res/layout/item_news_layout.xml" value="0.25364583333333335" />
-
         <entry key="..\:/Users/Public/git/mobileprogramming_team6/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Public/git/mobileprogramming_team6/app/src/main/res/layout/fragment_calender.xml" value="0.1296875" />
         <entry key="..\:/Users/Public/git2/mobileprogramming_team6/app/src/main/res/drawable-v24/ic_baseline_notifications_off_24.xml" value="0.1" />
@@ -44,7 +40,6 @@
         <entry key="app/src/main/res/layout/fragment_news.xml" value="0.25" />
         <entry key="app/src/main/res/layout/hello.xml" value="0.21041666666666667" />
         <entry key="app/src/main/res/layout/item_layout.xml" value="0.3197022466869008" />
-        <entry key="app/src/main/res/layout/item_layout_2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_news_layout.xml" value="0.10104166666666667" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.13958333333333334" />
