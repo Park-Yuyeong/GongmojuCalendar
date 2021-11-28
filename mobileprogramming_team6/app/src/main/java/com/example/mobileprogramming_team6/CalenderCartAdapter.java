@@ -97,6 +97,17 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
 
         });
 
+        holder.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ShowActivity.class);
+                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(intent);
+            }
+        });
+
+
+
     }
 
     @Override
@@ -118,20 +129,6 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
             this.image = itemView.findViewById(R.id.image);
             this.btnCart = itemView.findViewById(R.id.btn_cart);
 
-
-            itemView.setClickable(true);
-            itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION){
-                        Intent intent = new Intent(context, ShowActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                        context.startActivity(intent);
-                    }
-                }
-            });
 
 
         }
