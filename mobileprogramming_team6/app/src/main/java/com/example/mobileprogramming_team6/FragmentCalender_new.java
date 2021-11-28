@@ -104,7 +104,7 @@ public class FragmentCalender_new extends Fragment {
                     stock.setMonth(month);
                     stockInfo = new ArrayList<>();
                     stockInfo.add(stock);
-                    Log.d("name", String.valueOf(name));
+//                    Log.d("name", String.valueOf(name));
                     Log.d("month", String.valueOf(dateMonth));
                     Log.d("ListingDay", String.valueOf(dateListingDay));
                     Log.d("SubscriptDay", String.valueOf(dateSubscriptDay));
@@ -116,10 +116,13 @@ public class FragmentCalender_new extends Fragment {
                         adddate(2021, dateMonth, dateSubscriptDay);
 
                     }
+                    Cart c1 = new Cart();
+                    c1.setListingDate("상장일 2021-" + dateMonth + "-" + dateListingDay);
+                    c1.setName(name);
                     materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
                         @Override
                         public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-
+                            Log.d("name", String.valueOf(name));
                             c.clear();
                             if(date.getDay() == dateListingDay && date.getMonth() == dateMonth){
                                 Cart c1 = new Cart();
@@ -130,12 +133,14 @@ public class FragmentCalender_new extends Fragment {
 //                            if(date.getDay() == dateSubscriptDay-1 && date.getMonth() == dateMonth){
 //                                Cart c1 = new Cart();
 //                                c1.setSubscriptDate("청약일 2021-" + date.getMonth() + "-" + date.getDay());
+//                                c1.setName(name);
 //                                c.add(c1);
 //                            }
 //
 //                            if(date.getDay() == dateSubscriptDay && date.getMonth() == dateMonth){
 //                                Cart c1 = new Cart();
 //                                c1.setSubscriptDate("청약일 2021-" + date.getMonth() + "-" + date.getDay());
+//                                c1.setName(name);
 //                                c.add(c1);
 //                            }
                             adapter.notifyDataSetChanged();
