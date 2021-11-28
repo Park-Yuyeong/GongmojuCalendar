@@ -1,8 +1,10 @@
 package com.example.mobileprogramming_team6;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,7 @@ public class FragmentCart extends Fragment {
     private RecyclerView.Adapter adapter;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_cart, container, false) ;
         recyclerView = rootView.findViewById(R.id.recyclerView);//activity_main.xml에 구현된 id 연결
@@ -43,9 +46,11 @@ public class FragmentCart extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         cartArrayList = new ArrayList<>(); // Cart 객체를 담을 어레이 리스트(어뎁터 쪽으로_
+        String idByANDROID_ID =
+                Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
 
         database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
-        databaseReference = database.getReference("Users/user1"); //DB 테이블 연결
+        databaseReference = database.getReference("Users/" + idByANDROID_ID); //DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
