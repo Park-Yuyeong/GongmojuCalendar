@@ -6,6 +6,7 @@ public class Stock {
     private String listingDate; // 상장일
     private String month; // 해당 월
     private String subscriptDate; // 청약일
+    private String infor; // 기업정보
 
     public Stock() {
 
@@ -42,4 +43,9 @@ public class Stock {
     public void setSubscriptDate(String subscriptDate) {
         this.subscriptDate = subscriptDate;
     }
+
+    public String getInfor(){return infor;}
+
+    public void setInfor(String infor) { this.infor = infor;}
+
 }
