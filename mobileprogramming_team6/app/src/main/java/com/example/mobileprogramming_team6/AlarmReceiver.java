@@ -46,7 +46,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Intent intent1 = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        builder.setSmallIcon(R.drawable.ic_baseline_notifications_24)
+        builder.setSmallIcon(R.mipmap.ic_main_foreground)
                 .setContentText("공모주 일정 알림")
                 .setContentText("새로운 공모주 일정이 있습니다") // 가능하면 청약일, 상장일 알림 문구를 다르게 하고 싶음
                 .setAutoCancel(true) // 알림 클릭시 해당 페이지로 이동하며 알림 자동 삭제
