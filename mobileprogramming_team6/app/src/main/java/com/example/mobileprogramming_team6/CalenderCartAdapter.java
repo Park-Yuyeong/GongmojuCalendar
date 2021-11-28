@@ -1,6 +1,7 @@
 package com.example.mobileprogramming_team6;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,20 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
             super(itemView);
             this.tvName = itemView.findViewById(R.id.tv_name);
             this.tvDate = itemView.findViewById(R.id.tv_date);
+
+            itemView.setClickable(true);
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        Intent intent = new Intent(context, ShowActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        context.startActivity(intent);
+                    }
+                }
+            });
 
 
         }
