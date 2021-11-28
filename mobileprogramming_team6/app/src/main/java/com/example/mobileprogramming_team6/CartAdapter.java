@@ -44,7 +44,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private NotificationManager notificationManager;
     NotificationCompat.Builder builder;
 
-    String date = "2021-11-25"; // 임의의 날짜 설정
+    String date = "2021-10-31"; // 임의의 날짜 설정
     String listDate; // 상장일 string
     String subsDate; // 청약일 string
 
@@ -99,6 +99,31 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 subsDate = holder.tvSubscriptDate.getText().toString();
                 //listDate = makeDateString(2021, 10, Integer.parseInt(holder.tvListingDate.getText().toString()));
                 //subsDate = makeDateString(2021, 11, Integer.parseInt(holder.tvSubscriptDate.getText().toString()));
+                if (listDate == "0") { // 상장일이 0값일 때
+                    listDate = date;
+                }
+                if (subsDate == "0"){ // 청약일이 0값일 떄
+                    subsDate = date;
+                }
+                else{
+                    String first = subsDate.substring(0, 8);
+                    int second = Integer.parseInt(subsDate.substring(8,10)) - 1;
+
+                    if (second == 0){
+                        if (Integer.parseInt(subsDate.substring(5,7)) == 11){
+                            subsDate = date;
+                        }
+                        else{
+                            subsDate = "2021-11-30";
+                        }
+                    }
+                    else if (second < 10){
+                        subsDate = first + "0" + Integer.toString(second);
+                    }
+                    else{
+                        subsDate = first + Integer.toString(second);
+                    }
+                }
 
                 if (holder.btnNoti.isSelected()){
                     if (am_list == null && am_subs == null){
@@ -109,29 +134,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
                         mCalendar = new GregorianCalendar();
 
-                        Log.d("string?", holder.tvListingDate.getText().toString());
-
                         setAlarm_list();
                         setAlarm_subs();
                     }
-                    else if (am_list == null){
+                    else if (am_subs == null){
                         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-                        am_subs = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                        am_list = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
                         mCalendar = new GregorianCalendar();
 
-                        Log.d("string?", holder.tvListingDate.getText().toString());
-
-                        setAlarm_subs();
+                        setAlarm_list();
                     }
                     holder.btnNoti.setSelected(false);
 
                     editor.putBoolean(holder.tvName.getText().toString(), false);
                     editor.commit();
 
-                    if (am_list == null){
-                        cancelAlarm_subs();
+                    if (am_subs == null){
+                        cancelAlarm_list();
                     }
                     else{
                         cancelAlarm_list();
@@ -156,7 +177,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     setAlarm_subs();
 
                     try {
-                        if(!nowCompare(subsDate)){
+                        if(!nowCompare(listDate)){
                             cancelAlarm_list();
                             cancelAlarm_subs();
                             return;
@@ -166,8 +187,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     }
 
                     try {
-                        if (!nowCompare(listDate)){
-                            cancelAlarm_list();
+                        if (!nowCompare(subsDate)){
+                            cancelAlarm_subs();
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
