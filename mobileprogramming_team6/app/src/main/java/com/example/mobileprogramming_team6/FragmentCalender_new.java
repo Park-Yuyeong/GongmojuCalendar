@@ -1,5 +1,6 @@
 package com.example.mobileprogramming_team6;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -43,6 +44,8 @@ public class FragmentCalender_new extends Fragment {
     ArrayList<Cart> c;
 
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
 
 
     public void adddate(int year, int month, int day){ //날짜 리스트 만드는 함수
@@ -93,9 +96,12 @@ public class FragmentCalender_new extends Fragment {
                     int dateMonth = Integer.parseInt(month) - 1;
                     int dateListingDay = Integer.parseInt(stock.getListingDate());
                     int dateSubscriptDay = Integer.parseInt(stock.getSubscriptDate());
+                    String dataInfor = stock.getInfor();
                     Log.d("month", String.valueOf(dateMonth));
                     Log.d("ListingDay", String.valueOf(dateListingDay));
                     Log.d("SubscriptDay", String.valueOf(dateSubscriptDay));
+                    Log.d("Infor", String.valueOf(dataInfor));
+
                     if (dateListingDay != 0) {
                         adddate2(2021, dateMonth, dateListingDay);
                     }
@@ -160,6 +166,7 @@ public class FragmentCalender_new extends Fragment {
                             int dateMonth = month - 1;
                             int dateListingDay = Integer.parseInt(stock.getListingDate());
                             int dateSubscriptDay = Integer.parseInt(stock.getSubscriptDate());
+                            String dataInfor = stock.getInfor();
                             String name = snapshot.getKey();
 
                             if(date.getDay() == dateListingDay && date.getMonth() == dateMonth){
@@ -167,14 +174,17 @@ public class FragmentCalender_new extends Fragment {
 //
                                 c1.setListingDate(stock.getListingDate());
                                 c1.setMonth(Integer.toString(date.getMonth()+1));
+                                c1.setInfor(stock.getInfor());
                                 c1.setName(name);
                                 c.add(c1);
+
                             }
                             if(date.getDay() == dateSubscriptDay-1 && date.getMonth() == dateMonth){
                                 Cart c1 = new Cart();
 //
                                 c1.setSubscriptDate(Integer.toString(date.getDay()));
                                 c1.setMonth(Integer.toString(date.getMonth()+1));
+                                c1.setInfor(stock.getInfor());
                                 c1.setName(name);
                                 c.add(c1);
 
@@ -185,6 +195,7 @@ public class FragmentCalender_new extends Fragment {
 //
                                 c1.setSubscriptDate(Integer.toString(date.getDay()));
                                 c1.setMonth(Integer.toString(date.getMonth()+1));
+                                c1.setInfor(stock.getInfor());
                                 c1.setName(name);
                                 c.add(c1);
                             }
