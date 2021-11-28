@@ -1,6 +1,10 @@
 package com.example.mobileprogramming_team6;
 
+import static java.security.AccessController.getContext;
+
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.security.AccessControlContext;
 import java.util.ArrayList;
 
 public class NewsCartAdapter extends RecyclerView.Adapter<NewsCartAdapter.NewsCartViewHolder> {
@@ -16,6 +21,9 @@ public class NewsCartAdapter extends RecyclerView.Adapter<NewsCartAdapter.NewsCa
 
     private ArrayList<Cart> arrayList;
     private Context context;
+
+
+
 
 
     public NewsCartAdapter(ArrayList<Cart> arrayList , Context context){
