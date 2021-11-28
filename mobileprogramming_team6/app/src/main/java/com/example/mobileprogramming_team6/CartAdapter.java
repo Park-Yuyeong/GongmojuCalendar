@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.shapes.Shape;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -207,8 +208,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 if (am_subs != null && holder.btnNoti.isSelected()){
                     cancelAlarm_subs();
                 }
-
-                FirebaseDatabase.getInstance().getReference("Users/user1").child(holder.tvName.getText().toString()).removeValue();
+                String idByANDROID_ID =
+                        Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+                FirebaseDatabase.getInstance().getReference("Users/" + idByANDROID_ID).child(holder.tvName.getText().toString()).removeValue();
 
                 arrayList.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
