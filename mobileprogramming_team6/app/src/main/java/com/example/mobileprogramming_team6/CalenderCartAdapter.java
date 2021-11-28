@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,8 +109,9 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
         holder.tvName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ShowActivity.class);
-                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+//                Intent intent = new Intent(view.getContext(), ShowActivity.class);
+//                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(arrayList.get(position).getInfor()));
                 view.getContext().startActivity(intent);
             }
         });
