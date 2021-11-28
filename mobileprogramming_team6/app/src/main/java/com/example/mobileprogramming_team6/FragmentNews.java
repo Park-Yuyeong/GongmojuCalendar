@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class FragmentNews extends Fragment {
@@ -40,11 +41,23 @@ public class FragmentNews extends Fragment {
     private FirebaseDatabase database2;
     private DatabaseReference databaseReference2;
 
+    LocalDateTime now = LocalDateTime.now();
+
+
+
+
 
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_news, container, false) ;
+
+        String today_day = String.valueOf(now.getDayOfMonth());
+        String today_dayminus1 = String.valueOf(now.getDayOfMonth()-1);
+        String today_month = String.valueOf(now.getMonthValue());
+        String today = "2021-"+today_month+"-" +today_day;
+
+        String todayminus1 = "2021-"+today_month+"-" +today_dayminus1;
 
 
         recyclerView = rootView.findViewById(R.id.recyclerView2);
@@ -54,7 +67,7 @@ public class FragmentNews extends Fragment {
         cartArrayList = new ArrayList<>(); // Cart 객체를 담을 어레이 리스트(어뎁터 쪽으로_)
 
         database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
-        databaseReference = database.getReference("Users"); //DB 테이블 연결
+        databaseReference = database.getReference("Users/user1"); //DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -62,10 +75,11 @@ public class FragmentNews extends Fragment {
                 cartArrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){ // 반복문으로 데이터 List를 추출해냄
                     Cart cart = snapshot.getValue(Cart.class); // 만들어뒀던 Cart 객체에 데이터를 담는다.
+                    Log.d("text", today + cart.getListingDate() );
+                    cart.setName(snapshot.getKey());
+                    if(today.equals(cart.getListingDate()) ||( today.equals(cart.getSubscriptDate()) ||today_dayminus1.equals(cart.getSubscriptDate()) ))
 
-
-                    ////////////////이곳은 오늘 날짜와 같은 데이터만 뽑아야함/////////////////
-                    cartArrayList.add(cart);
+                        cartArrayList.add(cart);
                 }
                 adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
             }
@@ -92,7 +106,7 @@ public class FragmentNews extends Fragment {
         cartArrayList2 = new ArrayList<>(); // Cart 객체를 담을 어레이 리스트(어뎁터 쪽으로_)
 
         database2 = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
-        databaseReference2 = database.getReference("2021년 청약일정"); //DB 테이블 연결
+        databaseReference2 = database.getReference("2021년 청약일정/11"); //DB 테이블 연결
         databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -100,9 +114,15 @@ public class FragmentNews extends Fragment {
                 cartArrayList2.clear(); // 기존 배열리스트가 존재하지않게 초기화
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){ // 반복문으로 데이터 List를 추출해냄
                     Cart cart = snapshot.getValue(Cart.class); // 만들어뒀던 Cart 객체에 데이터를 담는다.
+                    cart.setName(snapshot.getKey());
+
+                    String listidate = "2021-11-"+cart.getListingDate();
+                    String subdate =  "2021-11-"+cart.getSubscriptDate();
+
+                    if(listidate.equals(today) || subdate.equals(today) || subdate.equals(today_dayminus1))
 
                     ////////////////이곳은 오늘 날짜와 같은 데이터만 뽑아야함/////////////////
-                    cartArrayList2.add(cart);
+                        cartArrayList2.add(cart);
                 }
                 adapter2.notifyDataSetChanged(); // 리스트 저장 및 새로고침
             }
@@ -113,6 +133,39 @@ public class FragmentNews extends Fragment {
                 Log.e("MainActivity",String.valueOf(error.toException())); // 에러문 출력
             }
         });
+
+
+        databaseReference2 = database.getReference("2021년 청약일정/12"); //DB 테이블 연결
+        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){ // 반복문으로 데이터 List를 추출해냄
+                    Cart cart = snapshot.getValue(Cart.class); // 만들어뒀던 Cart 객체에 데이터를 담는다.
+                    cart.setName(snapshot.getKey());
+
+                    String listidate = "2021-12-"+cart.getListingDate();
+                    String subdate =  "2021-12-"+cart.getSubscriptDate();
+
+                    if(listidate.equals(today) || subdate.equals(today) || subdate.equals(today_dayminus1))
+
+                        ////////////////이곳은 오늘 날짜와 같은 데이터만 뽑아야함/////////////////
+                        cartArrayList2.add(cart);
+                }
+                adapter2.notifyDataSetChanged(); // 리스트 저장 및 새로고침
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("MainActivity",String.valueOf(error.toException())); // 에러문 출력
+            }
+        });
+
+
+
+
         adapter2 = new NewsCartAdapter(cartArrayList2, getActivity());
         recyclerView2.setAdapter(adapter2);
 
