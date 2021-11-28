@@ -13,9 +13,6 @@
         android:theme="@style/Theme.Mobileprogramming_team6"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ShowActivity"
-            android:exported="true" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
