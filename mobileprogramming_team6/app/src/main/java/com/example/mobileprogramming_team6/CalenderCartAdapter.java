@@ -3,6 +3,7 @@ package com.example.mobileprogramming_team6;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,23 +74,25 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
 
         databaseReference = database.getReference();
         holder.btnCart.setOnClickListener(new View.OnClickListener() {
+            String idByANDROID_ID =
+                    Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
             @Override
             public void onClick(View view) {
                 if(listingDay != null) {
                     if (listingDay.length() != 1) {
-                        databaseReference.child("Users").child("user1").child(arrayList.get(position).getName()).child("listingDate").setValue("2021-" + month + "-" + listingDay);
+                        databaseReference.child("Users").child(idByANDROID_ID).child(arrayList.get(position).getName()).child("listingDate").setValue("2021-" + month + "-" + listingDay);
                         Toast.makeText(context.getApplicationContext(), "관심종목에 등록되었습니다.", Toast.LENGTH_LONG).show();
                     } else {
-                        databaseReference.child("Users").child("user1").child(arrayList.get(position).getName()).child("listingDate").setValue("2021-" + month + "-0" + listingDay);
+                        databaseReference.child("Users").child(idByANDROID_ID).child(arrayList.get(position).getName()).child("listingDate").setValue("2021-" + month + "-0" + listingDay);
                         Toast.makeText(context.getApplicationContext(), "관심종목에 등록되었습니다.", Toast.LENGTH_LONG).show();
                     }
                 }
                 else if(subscriptDay != null) {
                     if (subscriptDay.length() != 1) {
-                        databaseReference.child("Users").child("user1").child(arrayList.get(position).getName()).child("subscriptDate").setValue("2021-" + month + "-" + subscriptDay);
+                        databaseReference.child("Users").child(idByANDROID_ID).child(arrayList.get(position).getName()).child("subscriptDate").setValue("2021-" + month + "-" + subscriptDay);
                         Toast.makeText(context.getApplicationContext(), "관심종목에 등록되었습니다.", Toast.LENGTH_LONG).show();
                     } else {
-                        databaseReference.child("Users").child("user1").child(arrayList.get(position).getName()).child("subscriptDate").setValue("2021-" + month + "-0" + subscriptDay);
+                        databaseReference.child("Users").child(idByANDROID_ID).child(arrayList.get(position).getName()).child("subscriptDate").setValue("2021-" + month + "-0" + subscriptDay);
                         Toast.makeText(context.getApplicationContext(), "관심종목에 등록되었습니다.", Toast.LENGTH_LONG).show();
                     }
                 }
