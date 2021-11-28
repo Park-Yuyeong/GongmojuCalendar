@@ -59,21 +59,21 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
         if(listingDay != null){
             if(listingDay.length() != 1) {
                 holder.tvDate.setText("상장일 2021-" + month + "-" + listingDay);
-                holder.tvDate.setTextColor(Color.RED);
+                holder.tvDate.setTextColor(Color.rgb(225, 102, 102));
             }
             else{
                 holder.tvDate.setText("상장일 2021-" + month + "-0" + listingDay);
-                holder.tvDate.setTextColor(Color.RED);
+                holder.tvDate.setTextColor(Color.rgb(225, 102, 102));
             }
         }
         else if(subscriptDay != null){
             if(subscriptDay.length() != 1){
                 holder.tvDate.setText("청약일 2021-" + month + "-" + subscriptDay);
-                holder.tvDate.setTextColor(Color.BLUE);
+                holder.tvDate.setTextColor(Color.rgb(102,153,255));
             }
             else{
                 holder.tvDate.setText("청약일 2021-" + month + "-0" + subscriptDay);
-                holder.tvDate.setTextColor(Color.BLUE);
+                holder.tvDate.setTextColor(Color.rgb(102,153,255));
             }
         }
         database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동

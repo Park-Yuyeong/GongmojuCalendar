@@ -120,7 +120,8 @@ public class FragmentCalender_new extends Fragment {
                         ArrayList<CalendarDay> dates1 = new ArrayList<>();
                         dates1.add(dates.get(i));
                         dates1.add(dates.get(i + 1));
-                        Eventdecorator e1 = new Eventdecorator(Color.BLUE, dates1);
+
+                        Eventdecorator e1 = new Eventdecorator(Color.rgb(102,153,255), dates1);
                         e.add(e1);
 
                         materialCalendarView.addDecorators(e);
@@ -131,7 +132,7 @@ public class FragmentCalender_new extends Fragment {
                 for (int i = 0; i < dates_2.size(); i++) {
                     ArrayList<CalendarDay> dates1 = new ArrayList<>();
                     dates1.add(dates_2.get(i));
-                    Eventdecorator e1 = new Eventdecorator(Color.RED, dates1);
+                    Eventdecorator e1 = new Eventdecorator(Color.rgb(225, 102, 102), dates1);
                     e.add(e1);
                     materialCalendarView.addDecorators(e);
                 }
