@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -134,6 +135,8 @@ public class FragmentCalender_new extends Fragment {
             }
         });
     }
+
+
     void cartRef(int month, ViewGroup rootView){
         recyclerView = rootView.findViewById(R.id.recyclerView1);
         recyclerView.setHasFixedSize(true);
@@ -207,9 +210,14 @@ public class FragmentCalender_new extends Fragment {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_calender_new, container, false) ;
         materialCalendarView = (MaterialCalendarView)rootView.findViewById(R.id.calender);
 
+        Log.d("month", String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1));
 
-
-
+        materialCalendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
+            @Override
+            public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
+                Log.d("month", materialCalendarView.getCurrentDate().toString());
+            }
+        });
 
         //DB에서 데이터를 가져와서 1~12달력에 찍어주는 함수//
 //        dbRef("1");
