@@ -38,8 +38,12 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
     public void onBindViewHolder(@NonNull CalenderCartViewHolder holder, int position) {
 
         holder.tvName.setText(arrayList.get(position).getName());
-        holder.tvListingDate.setText(arrayList.get(position).getListingDate());
-        holder.tvSubscriptDate.setText(arrayList.get(position).getSubscriptDate());
+        if(arrayList.get(position).getListingDate() != null){
+            holder.tvDate.setText("상장일 2021-" +arrayList.get(position).getMonth()+"-" +arrayList.get(position).getListingDate());
+        }
+        else if(arrayList.get(position).getSubscriptDate() != null){
+            holder.tvDate.setText("청약일 2021-" +arrayList.get(position).getMonth()+"-" +arrayList.get(position).getSubscriptDate());
+        }
 
     }
 
@@ -51,14 +55,12 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
     public class CalenderCartViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvName;
-        TextView tvSubscriptDate;
-        TextView tvListingDate;
+        TextView tvDate;
 
         public CalenderCartViewHolder(@NonNull View itemView) {
             super(itemView);
             this.tvName = itemView.findViewById(R.id.tv_name);
-            this.tvSubscriptDate = itemView.findViewById(R.id.tv_date2);
-            this.tvListingDate = itemView.findViewById(R.id.tv_date1);
+            this.tvDate = itemView.findViewById(R.id.tv_date);
 
 
         }

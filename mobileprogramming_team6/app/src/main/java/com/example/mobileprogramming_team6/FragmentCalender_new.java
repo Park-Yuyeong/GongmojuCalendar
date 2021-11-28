@@ -40,7 +40,7 @@ public class FragmentCalender_new extends Fragment {
     MaterialCalendarView materialCalendarView;
     RecyclerView recyclerView;
     ArrayList<Cart> c;
-    ArrayList<Stock> stockInfo;
+
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
@@ -79,7 +79,7 @@ public class FragmentCalender_new extends Fragment {
     private DatabaseReference databaseReference;
 
     //데이터베이스 연동, 연결//
-     void dbRef(String month, ViewGroup rootView){
+     void dbRef(String month){
         database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
 
         databaseReference = database.getReference("2021년 청약일정/"+ month); // DB 테이블 연결
@@ -87,78 +87,29 @@ public class FragmentCalender_new extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                c = new ArrayList<>();
-
-                recyclerView = rootView.findViewById(R.id.recyclerView1);
-
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-                recyclerView.setLayoutManager(layoutManager);
-
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Stock stock = snapshot.getValue(Stock.class);
-                    int dateMonth =  Integer.parseInt(month)-1;
-                    int dateListingDay =  Integer.parseInt(stock.getListingDate());
-                    int dateSubscriptDay =  Integer.parseInt(stock.getSubscriptDate());
-                    String name = snapshot.getKey();
-                    stock.setName(name);
-                    stock.setMonth(month);
-                    stockInfo = new ArrayList<>();
-                    stockInfo.add(stock);
-//                    Log.d("name", String.valueOf(name));
+                    int dateMonth = Integer.parseInt(month) - 1;
+                    int dateListingDay = Integer.parseInt(stock.getListingDate());
+                    int dateSubscriptDay = Integer.parseInt(stock.getSubscriptDate());
                     Log.d("month", String.valueOf(dateMonth));
                     Log.d("ListingDay", String.valueOf(dateListingDay));
                     Log.d("SubscriptDay", String.valueOf(dateSubscriptDay));
-                    if(dateListingDay != 0){
+                    if (dateListingDay != 0) {
                         adddate2(2021, dateMonth, dateListingDay);
                     }
-                    if(dateSubscriptDay != 0){
-                        adddate(2021, dateMonth, dateSubscriptDay-1);
+                    if (dateSubscriptDay != 0) {
+                        adddate(2021, dateMonth, dateSubscriptDay - 1);
                         adddate(2021, dateMonth, dateSubscriptDay);
 
                     }
-                    Cart c1 = new Cart();
-                    c1.setListingDate("상장일 2021-" + dateMonth + "-" + dateListingDay);
-                    c1.setName(name);
-                    materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
-                        @Override
-                        public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                            Log.d("name", String.valueOf(name));
-                            c.clear();
-                            if(date.getDay() == dateListingDay && date.getMonth() == dateMonth){
-                                Cart c1 = new Cart();
-                                c1.setListingDate("상장일 2021-" + date.getMonth() + "-" + date.getDay());
-                                c1.setName(name);
-                                c.add(c1);
-                            }
-//                            if(date.getDay() == dateSubscriptDay-1 && date.getMonth() == dateMonth){
-//                                Cart c1 = new Cart();
-//                                c1.setSubscriptDate("청약일 2021-" + date.getMonth() + "-" + date.getDay());
-//                                c1.setName(name);
-//                                c.add(c1);
-//                            }
-//
-//                            if(date.getDay() == dateSubscriptDay && date.getMonth() == dateMonth){
-//                                Cart c1 = new Cart();
-//                                c1.setSubscriptDate("청약일 2021-" + date.getMonth() + "-" + date.getDay());
-//                                c1.setName(name);
-//                                c.add(c1);
-//                            }
-                            adapter.notifyDataSetChanged();
-                        }
-
-                    });
-                    adapter = new CalenderCartAdapter(c, getActivity());
-                    recyclerView.setAdapter(adapter);
                 }
 
-
-                for(int i = 0 ; i < dates.size()-1; i++){
-                    if (i%2 == 0 ){
+                for (int i = 0; i < dates.size() - 1; i++) {
+                    if (i % 2 == 0) {
                         ArrayList<CalendarDay> dates1 = new ArrayList<>();
                         dates1.add(dates.get(i));
-                        dates1.add(dates.get(i+1));
-//                        Log.d("hello", dates1.toString());
-//                        Log.d("hello", colors.get(i).toString());
+                        dates1.add(dates.get(i + 1));
                         Eventdecorator e1 = new Eventdecorator(Color.BLUE, dates1);
                         e.add(e1);
 
@@ -167,18 +118,14 @@ public class FragmentCalender_new extends Fragment {
                     }
                 }
 
-                for(int i = 0; i<dates_2.size(); i++){
+                for (int i = 0; i < dates_2.size(); i++) {
                     ArrayList<CalendarDay> dates1 = new ArrayList<>();
                     dates1.add(dates_2.get(i));
                     Eventdecorator e1 = new Eventdecorator(Color.RED, dates1);
                     e.add(e1);
                     materialCalendarView.addDecorators(e);
                 }
-
-
             }
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -186,6 +133,72 @@ public class FragmentCalender_new extends Fragment {
                 Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
             }
         });
+    }
+    void cartRef(int month, ViewGroup rootView){
+        recyclerView = rootView.findViewById(R.id.recyclerView1);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        c = new ArrayList<>();
+
+
+        database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
+
+        databaseReference = database.getReference("2021년 청약일정/"+ month); // DB 테이블 연결
+        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        c.clear();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Stock stock = snapshot.getValue(Stock.class);
+                            int dateMonth = month - 1;
+                            int dateListingDay = Integer.parseInt(stock.getListingDate());
+                            int dateSubscriptDay = Integer.parseInt(stock.getSubscriptDate());
+                            String name = snapshot.getKey();
+
+                            if(date.getDay() == dateListingDay && date.getMonth() == dateMonth){
+                                Cart c1 = new Cart();
+                                c1.setListingDate(stock.getListingDate());
+                                c1.setMonth(Integer.toString(date.getMonth()+1));
+                                c1.setName(name);
+                                c.add(c1);
+                            }
+                            if(date.getDay() == dateSubscriptDay-1 && date.getMonth() == dateMonth){
+                                Cart c1 = new Cart();
+                                c1.setSubscriptDate(Integer.toString(date.getDay()));
+                                c1.setMonth(Integer.toString(date.getMonth()+1));
+                                c1.setName(name);
+                                c.add(c1);
+
+                            }
+
+                            if(date.getDay() == dateSubscriptDay && date.getMonth() == dateMonth){
+                                Cart c1 = new Cart();
+                                c1.setSubscriptDate(Integer.toString(date.getDay()));
+                                c1.setMonth(Integer.toString(date.getMonth()+1));
+                                c1.setName(name);
+                                c.add(c1);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+
+        });
+
+        adapter = new CalenderCartAdapter(c, getActivity());
+        recyclerView.setAdapter(adapter);
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -196,13 +209,8 @@ public class FragmentCalender_new extends Fragment {
 
 
 
-//        names.add("NH");
-//        names.add("NH");
-//        names.add("카카오");
-//        names.add("카카오");
-//        names.add("daum");
-//        names.add("daum");
-        
+
+
         //DB에서 데이터를 가져와서 1~12달력에 찍어주는 함수//
 //        dbRef("1");
 //        dbRef("2");
@@ -214,60 +222,12 @@ public class FragmentCalender_new extends Fragment {
 //        dbRef("8");
 //        dbRef("9");
 //        dbRef("10");
-        dbRef("11", rootView);
-        dbRef("12", rootView);
+        dbRef("11");
+        dbRef("12");
 
-
-//        c = new ArrayList<>();
-
-
-//        recyclerView = rootView.findViewById(R.id.recyclerView1);
-//
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        adapter = new CalenderCartAdapter(c, getActivity());
-//        recyclerView.setAdapter(adapter);
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        adapter.notifyDataSetChanged();
-//
-//
-//
-//
-//        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
-//            @Override
-//            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-//
-//                c.clear();
-//                String a = materialCalendarView.getSelectedDate().toString();
-//                Cart c1 = new Cart();
-//                c1.setListingDate(a);
-//                c1.setName("회사명");
-//                c1.setSubscriptDate("2021 ~~~");
-//                c.add(c1);
-//                adapter.notifyDataSetChanged();
-//
-//                Cart c2 = new Cart();
-//                c2.setListingDate(a);
-//                c2.setName("ㅁㅁㅁ");
-//                c2.setSubscriptDate("2021~~~");
-//                c.add(c2);
-//                adapter.notifyDataSetChanged();
-//
-//
-//            }
-//
-//        });
-
-
-
-
-//        adapter.notifyDataSetChanged();
-//        adapter = new CalenderCartAdapter(c, getActivity());
-//        recyclerView.setAdapter(adapter);
-
-
+        // 리사이클뷰로 db에서 받은 데이터를 쏴줌
+        cartRef(11, rootView);
+//        cartRef(12, rootView);
 
 
         return rootView;

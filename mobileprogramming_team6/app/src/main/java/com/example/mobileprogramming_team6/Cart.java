@@ -3,6 +3,7 @@ package com.example.mobileprogramming_team6;
 // Cart 페이지에 넣어줄 객체 생성
 public class Cart {
     private String Name; // 기업명
+    private String month;
     private String listingDate; // 상장일
     private String subscriptDate; // 청약일
     private String infor; // 기업정보
@@ -10,6 +11,15 @@ public class Cart {
     public Cart() {
 
     }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
     public String getName() {
         return Name;
     }
