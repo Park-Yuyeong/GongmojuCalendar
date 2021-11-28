@@ -11,6 +11,8 @@ import android.widget.TextView;
 public class ShowActivity extends AppCompatActivity {
 
     private WebView webView;
+
+    // url 을 stock.getInfor 로 String값 받는거 필요
     private String url = "https://www.naver.com/";
 
     @Override

@@ -110,6 +110,9 @@ public class FragmentCalender_new extends Fragment {
                         adddate(2021, dateMonth, dateSubscriptDay);
 
                     }
+
+                    // month 가 11월 12 월 일때 info 정보 받아오기
+                    
                 }
 
                 for (int i = 0; i < dates.size() - 1; i++) {
