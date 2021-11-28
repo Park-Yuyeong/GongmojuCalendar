@@ -56,7 +56,6 @@ public class FragmentCart extends Fragment {
                     Cart cart = snapshot.getValue(Cart.class); // 만들어뒀던 Cart 객체에 데이터를 담는다.
                     cart.setName(snapshot.getKey());
                     cartArrayList.add(cart); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
-
                 }
                 adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
             }
@@ -69,9 +68,6 @@ public class FragmentCart extends Fragment {
         });
         adapter = new CartAdapter(cartArrayList, getActivity());
         recyclerView.setAdapter(adapter);
-
-
-
 
         return rootView;
 
