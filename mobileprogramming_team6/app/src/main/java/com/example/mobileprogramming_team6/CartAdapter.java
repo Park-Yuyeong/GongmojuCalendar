@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -159,6 +160,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                         cancelAlarm_list();
                         cancelAlarm_subs();
                     }
+                    Toast.makeText(context.getApplicationContext(), "공모주 알림 취소", Toast.LENGTH_LONG).show();
                 }
                 else{
                     holder.btnNoti.setSelected(true);
@@ -175,6 +177,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
                     setAlarm_list();
                     setAlarm_subs();
+
+                    Toast.makeText(context.getApplicationContext(), "공모주 알림 ON!!", Toast.LENGTH_LONG).show();
+
 
                     try {
                         if(!nowCompare(listDate)){
@@ -207,6 +212,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 if (am_subs != null && holder.btnNoti.isSelected()){
                     cancelAlarm_subs();
                 }
+
+                Toast.makeText(context.getApplicationContext(), "관심종목 삭제", Toast.LENGTH_LONG).show();
+
                 String idByANDROID_ID =
                         Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
                 FirebaseDatabase.getInstance().getReference("Users/" + idByANDROID_ID).child(holder.tvName.getText().toString()).removeValue();
