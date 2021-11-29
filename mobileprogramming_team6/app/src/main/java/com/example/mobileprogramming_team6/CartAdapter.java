@@ -184,7 +184,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     try {
                         if(!nowCompare(listDate)){
                             cancelAlarm_list();
-                            setAlarm_list();
+                            //setAlarm_list();
                             return;
                         }
                     } catch (ParseException e) {
@@ -194,7 +194,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     try {
                         if (!nowCompare(subsDate)){
                             cancelAlarm_subs();
-                            setAlarm_subs();
+                            //setAlarm_subs();
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
