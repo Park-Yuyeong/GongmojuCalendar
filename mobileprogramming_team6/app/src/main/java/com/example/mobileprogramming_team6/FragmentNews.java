@@ -128,6 +128,7 @@ public class FragmentNews extends Fragment {
 
                     ////////////////이곳은 오늘 날짜와 같은 데이터만 뽑아야함/////////////////
                         cartArrayList2.add(cart);
+
                 }
                 adapter2.notifyDataSetChanged(); // 리스트 저장 및 새로고침
             }
@@ -173,6 +174,8 @@ public class FragmentNews extends Fragment {
 
         adapter2 = new NewsCartAdapter(cartArrayList2, getActivity());
         recyclerView2.setAdapter(adapter2);
+        adapter2.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
 
 
 
