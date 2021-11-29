@@ -184,7 +184,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     try {
                         if(!nowCompare(listDate)){
                             cancelAlarm_list();
-                            cancelAlarm_subs();
+                            setAlarm_list();
                             return;
                         }
                     } catch (ParseException e) {
@@ -194,6 +194,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     try {
                         if (!nowCompare(subsDate)){
                             cancelAlarm_subs();
+                            setAlarm_subs();
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -212,6 +213,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 if (am_subs != null && holder.btnNoti.isSelected()){
                     cancelAlarm_subs();
                 }
+
+                editor.putBoolean(holder.tvName.getText().toString(), false);
+                editor.commit();
 
                 Toast.makeText(context.getApplicationContext(), "관심종목 삭제", Toast.LENGTH_LONG).show();
 
