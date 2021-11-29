@@ -53,20 +53,23 @@ public class NewsCartAdapter extends RecyclerView.Adapter<NewsCartAdapter.NewsCa
         holder.tvName.setText(arrayList.get(position).getName());
         holder.tvListingDate.setText(arrayList.get(position).getSubscriptDate());
         holder.tvSubscriptDate.setText(arrayList.get(position).getListingDate());
-        if(arrayList.get(position).getListingDate().length() < 3){
-            if(holder.tvListingDate.getText().equals(today_day)) {
-                holder.tvSubscriptDate.setText("                   청약");
-                holder.tvSubscriptDate.setTextColor(Color.rgb(102,153,255));
-                holder.tvSubscriptDate.setTextSize(14);
-                holder.tvListingDate.setText("");
+        if(arrayList.get(position).getListingDate() != null) {
+            if (arrayList.get(position).getListingDate().length() < 3) {
 
-            }
-            if(holder.tvSubscriptDate.getText().equals(today_day)) {
-                holder.tvSubscriptDate.setText("                   상장");
-                holder.tvSubscriptDate.setTextColor(Color.rgb(225, 102, 102));
-                holder.tvSubscriptDate.setTextSize(14);
-                holder.tvListingDate.setText("");
+                if (holder.tvListingDate.getText().equals(today_day)) {
+                    holder.tvSubscriptDate.setText("                   청약");
+                    holder.tvSubscriptDate.setTextColor(Color.rgb(102, 153, 255));
+                    holder.tvSubscriptDate.setTextSize(14);
+                    holder.tvListingDate.setText("");
 
+                }
+                if (holder.tvSubscriptDate.getText().equals(today_day)) {
+                    holder.tvSubscriptDate.setText("                   상장");
+                    holder.tvSubscriptDate.setTextColor(Color.rgb(225, 102, 102));
+                    holder.tvSubscriptDate.setTextSize(14);
+                    holder.tvListingDate.setText("");
+
+                }
             }
         }
 
