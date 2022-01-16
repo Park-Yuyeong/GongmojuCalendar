@@ -18,8 +18,8 @@ public class Eventdecorator implements DayViewDecorator {
     private final ArrayList<CalendarDay> dates;
 
     public Eventdecorator(int color, Collection<CalendarDay> dates){
-        this.color = color;
-        this.dates = new ArrayList<>(dates);
+        this.color = color; //색
+        this.dates = new ArrayList<>(dates); //날짜들
     }
     public int getColor(){return color;}
 

@@ -43,6 +43,7 @@ public class FragmentCalender_new extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Cart> c;
 
+
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
@@ -224,9 +225,11 @@ public class FragmentCalender_new extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_calender_new, container, false) ;
         materialCalendarView = (MaterialCalendarView)rootView.findViewById(R.id.calender);
+
 
         Log.d("month", String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1));
         //dbRef(String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1));

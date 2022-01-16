@@ -1,6 +1,7 @@
 package com.example.mobileprogramming_team6;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +35,7 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
     private DatabaseReference databaseReference;
 
 
+
     public CalenderCartAdapter(ArrayList<Cart> arrayList , Context context){
 
         this.arrayList = arrayList;
@@ -53,6 +56,7 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
         String month = arrayList.get(position).getMonth();
         String listingDay = arrayList.get(position).getListingDate();
         String subscriptDay = arrayList.get(position).getSubscriptDate();
+
 
         holder.tvName.setText(arrayList.get(position).getName());
 
@@ -111,8 +115,11 @@ public class CalenderCartAdapter extends RecyclerView.Adapter<CalenderCartAdapte
             public void onClick(View view) {
 //                Intent intent = new Intent(view.getContext(), ShowActivity.class);
 //                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(arrayList.get(position).getInfor()));
-                view.getContext().startActivity(intent);
+
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(arrayList.get(position).getInfor()));
+//                view.getContext().startActivity(intent);
+                    context.startActivity(new Intent(context, DialogActivity.class));
+
             }
         });
 
