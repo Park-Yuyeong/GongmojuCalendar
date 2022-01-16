@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="50px"
+        android:layout_weight="1">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:layout_marginBottom="20px"
+            android:text="회사이름" />
+
+    </LinearLayout>
+    <View
+        android:background="#ABD5AA"
+        android:layout_width="match_parent"
+        android:layout_marginRight="100px"
+        android:layout_marginLeft="100px"
+
+        android:layout_height="5px"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="50px"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@drawable/circle"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_marginTop="25px"
+            android:layout_weight="4"
+            android:text="    청약일" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:id="@+id/tvChungyak_Day"
+            android:layout_marginTop="25px"
+            android:layout_weight="4"
+            android:text="    청약일" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="50px"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@drawable/circle"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_weight="4"
+            android:layout_marginTop="25px"
+            android:text="    환불일" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:id="@+id/tvRefund_Day"
+            android:layout_marginTop="25px"
+            android:layout_weight="4"
+            android:text="    환불일" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="50px"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@drawable/circle"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_weight="4"
+
+            android:layout_marginTop="25px"
+            android:text="    상장일" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_weight="4"
+
+            android:layout_marginTop="25px"
+            android:id="@+id/tvSangJang_Day"
+            android:text="    상장일" />
+
+    </LinearLayout>
+    <View
+        android:background="#ABD5AA"
+        android:layout_width="match_parent"
+
+        android:layout_marginRight="100px"
+        android:layout_marginLeft="100px"
+        android:layout_height="5px"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="50px"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@drawable/circle"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_weight="4"
+            android:layout_marginTop="25px"
+            android:text="    희망공모가" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_weight="4"
+            android:layout_marginTop="25px"
+            android:id="@+id/tvHope_Price"
+            android:text="    희망공모가" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="50px"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@drawable/circle"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_weight="4"
+            android:layout_marginTop="25px"
+            android:text="    확정공모가" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_weight="4"
+            android:layout_marginTop="25px"
+            android:id="@+id/tvSet_Price"
+            android:text="    확정공모가" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="50px"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@drawable/circle"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_weight="4"
+            android:layout_marginTop="25px"
+            android:text="    최소청약증거금" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_weight="4"
+            android:id="@+id/tvSmallest_Price"
+            android:layout_marginTop="25px"
+            android:text="    최소청약증거금" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+</LinearLayout>

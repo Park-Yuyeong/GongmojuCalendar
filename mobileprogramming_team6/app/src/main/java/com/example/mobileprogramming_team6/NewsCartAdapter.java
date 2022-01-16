@@ -5,6 +5,7 @@ import static java.security.AccessController.getContext;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,12 @@ public class NewsCartAdapter extends RecyclerView.Adapter<NewsCartAdapter.NewsCa
                 }
             }
         }
+        holder.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, DialogActivity.class));
+            }
+        });
 
 
     }

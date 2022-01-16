@@ -90,7 +90,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         holder.linearlayout.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.shape_yellow));
 
-
+        holder.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, DialogActivity.class));
+            }
+        });
 
 
         // 알림 버튼 on&off
